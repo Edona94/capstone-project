@@ -5,7 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.time.LocalDate;
-@Document("employee")
+
+@Document("employees")
 public record Employee(
         @Id
         String id,
