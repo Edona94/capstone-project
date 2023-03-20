@@ -6,7 +6,7 @@ export default function useEmployees() {
     const [employees,setEmployees] =useState<Employee[]>([]);
 
     function loadAllEmployees() {
-        axios.get("/api/employees")
+        axios.get<Employee[]>("/api/employees")
             .then(response => response.data)
             .then(setEmployees)
             .catch(console.error)

@@ -1,9 +1,9 @@
 import {Employee} from "../model/Employee";
 
-type Props = {
+type EmployeeCardProps = {
     employee:Employee
 }
-export default function EmployeeCard(props:Props) {
+export default function EmployeeCard(props:EmployeeCardProps) {
     return(
         <div className={"employee-card"}>
             <p>{props.employee.firstName}</p>
