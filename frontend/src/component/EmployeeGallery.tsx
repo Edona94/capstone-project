@@ -1,5 +1,6 @@
 import {Employee} from "../model/Employee";
 import EmployeeCard from "./EmployeeCard";
+import "../styling/EmployeeGallery.css";
 
 type Props = {
     employees: Employee[]

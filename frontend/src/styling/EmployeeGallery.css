@@ -1,0 +1,7 @@
+.employee-gallery {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    padding: 5px;
+    gap: 5px;
+}

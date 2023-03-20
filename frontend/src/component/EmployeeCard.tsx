@@ -1,4 +1,5 @@
 import {Employee} from "../model/Employee";
+import "../styling/EmployeeCard.css";
 
 type EmployeeCardProps = {
     employee:Employee
