@@ -1,4 +1,4 @@
-type Address = {
+export type Address = {
     street: string,
     houseNumber: string,
     postalCode: string,
@@ -14,6 +14,6 @@ export type Employee = {
     address: Address,
     email: string,
     phoneNumber: string,
-    added: string,
-    cv: string
+    added: Date,
+    cv?:string
 }
