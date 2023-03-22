@@ -1,7 +1,7 @@
 import {Employee, Address} from "../model/Employee";
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import "../styling/EmployeeCard.css"
+import "../styling/AddEmployee.css"
 import moment from "moment";
 
 
