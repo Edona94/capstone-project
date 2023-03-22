@@ -11,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+          <Route path={"/"} element={<EmployeeGallery employees={employees}/>}/>
           <Route path={"/employees"} element={<EmployeeGallery employees={employees}/>}/>
           <Route path={"/employee/add"} element={<AddEmployee onAdd={postNewEmployee}/>}/>
          </Routes>

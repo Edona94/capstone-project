@@ -2,6 +2,7 @@ import {Employee} from "../model/Employee";
 import EmployeeCard from "./EmployeeCard";
 import "../styling/EmployeeGallery.css";
 import {ChangeEvent, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
     employees: Employee[]
@@ -9,6 +10,10 @@ type Props = {
 export default function EmployeeGallery(props: Props) {
 
     const [filter, setFilter] = useState("")
+    const navigate = useNavigate();
+    function handleClick() {
+        navigate("/employee/add")
+    }
 
     const filteredList = props.employees.filter((employee) =>
         employee
@@ -34,6 +39,9 @@ export default function EmployeeGallery(props: Props) {
         <>
             <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
             <section className={"employee-gallery"}>
+                <div>
+                <button onClick={handleClick}>Add a new Employee</button>
+                </div>
                 {employeeCards.length > 0 ? employeeCards : "No employees yet"}
             </section>
         </>
