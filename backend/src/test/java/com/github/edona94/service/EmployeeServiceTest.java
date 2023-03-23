@@ -13,6 +13,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -50,6 +52,7 @@ class EmployeeServiceTest {
                 );
 
     }
+
     @Test
     void getAllEmployees_whenFindAllReturnListOfOneEmployee_thenReturnListOfOneEmployee() {
         //GIVEN
@@ -86,4 +89,26 @@ class EmployeeServiceTest {
         verify(idService).generateId();
         assertEquals(expected,actual);
     }
+
+    @Test
+    void getEmployeeById_whenIdIsInRepository_thenReturnEmployee() {
+        //GIVEN
+        when(employeeRepository.findById(employee1.id())).thenReturn(Optional.of(employee1));
+        //WHEN
+        Employee expected = employee1;
+        Employee actual = employeeService.getEmployeeById(employee1.id());
+        //THEN
+        verify(employeeRepository).findById(employee1.id());
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void getEmployeeById_whenIdIsNotInRepository_thenThrowException() {
+        //GIVEN
+        when(employeeRepository.findById("2")).thenReturn(Optional.empty());
+        //WHEN & THEN
+        assertThrows(NoSuchElementException.class, () -> employeeService.getEmployeeById("2"));
+        verify(employeeRepository).findById("2");
+    }
+
 }
