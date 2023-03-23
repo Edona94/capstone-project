@@ -13,7 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
+    
     private final EmployeeService employeeService;
+
     @GetMapping
     public List<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();
@@ -22,6 +24,11 @@ public class EmployeeController {
     @PostMapping
     public Employee addEmployee(@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest,@RequestPart(value = "file", required = false) MultipartFile cv) {
         return employeeService.addEmployee(employeeDTORequest,cv);
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable String id) {
+        return employeeService.getEmployeeById(id);
     }
 
 }
