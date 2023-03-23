@@ -1,0 +1,40 @@
+.add-employee{
+    margin: 0 auto;
+    width: 80%;
+    display:grid;
+    border-radius: 5px;
+    background-color: rgba(198,198,198,0.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 30px;
+
+}
+.add-employee input{
+    width: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-employee button {
+    background-color: #4F58AD;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
+
+}
+
+.add-employee button:hover {
+    background-color: blueviolet;
+}
+.add-employee label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}

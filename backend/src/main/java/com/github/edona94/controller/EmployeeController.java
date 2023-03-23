@@ -1,11 +1,11 @@
 package com.github.edona94.controller;
 
 import com.github.edona94.model.Employee;
+import com.github.edona94.model.EmployeeDTORequest;
 import com.github.edona94.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,4 +18,10 @@ public class EmployeeController {
     public List<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();
     }
+
+    @PostMapping
+    public Employee addEmployee(@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest,@RequestPart(value = "file", required = false) MultipartFile cv) {
+        return employeeService.addEmployee(employeeDTORequest,cv);
+    }
+
 }
