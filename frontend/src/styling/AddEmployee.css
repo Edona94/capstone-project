@@ -6,8 +6,8 @@
     background-color: rgba(198,198,198,0.1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 30px;
-
 }
+
 .add-employee input{
     width: auto;
     padding: 12px 20px;
@@ -28,13 +28,32 @@
     cursor: pointer;
     font-weight: bold;
     float: right;
-
 }
 
 .add-employee button:hover {
     background-color: blueviolet;
 }
+
 .add-employee label {
     padding: 12px 12px 12px 0;
     display: inline-block;
+}
+
+.add-employee-h2 {
+    display:flex;
+    justify-content: center;
+}
+.add-employee menu {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 0;
+    gap: 1em;
+}
+.add-employee menu button.cancel {
+    background-color: brown;
+}
+.add-employee menu button.cancel:hover {
+    background-color: #ba052b;
 }
