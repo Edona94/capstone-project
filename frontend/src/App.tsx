@@ -4,6 +4,7 @@ import useEmployees from "./hooks/useEmployees";
 import {Route, Routes} from "react-router-dom";
 import EmployeeGallery from "./component/EmployeeGallery";
 import AddEmployee from "./component/AddEmployee";
+import EmployeeDetails from "./component/EmployeeDetails";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path={"/"} element={<EmployeeGallery employees={employees}/>}/>
           <Route path={"/employees"} element={<EmployeeGallery employees={employees}/>}/>
           <Route path={"/employee/add"} element={<AddEmployee onAdd={postNewEmployee}/>}/>
+          <Route path={"/employee/:id"} element={<EmployeeDetails employees={employees}/>}/>
          </Routes>
     </div>
   );
