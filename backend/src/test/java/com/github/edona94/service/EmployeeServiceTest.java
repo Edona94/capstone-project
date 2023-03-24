@@ -1,5 +1,6 @@
 package com.github.edona94.service;
 
+import com.github.edona94.exception.EmployeeNotFoundException;
 import com.github.edona94.model.Address;
 import com.github.edona94.model.Employee;
 import com.github.edona94.model.EmployeeDTORequest;
@@ -13,7 +14,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,9 +34,9 @@ class EmployeeServiceTest {
         idService = mock(IdService.class);
         cvService = mock(CVService.class);
         multipartFile = mock(MultipartFile.class);
-        employeeService = new EmployeeService(employeeRepository,idService, cvService);
-        LocalDate dateOfBirth1 = LocalDate.of(1991,1,1);
-        Address address1 = new Address("street1","1","80000","Munich");
+        employeeService = new EmployeeService(employeeRepository, idService, cvService);
+        LocalDate dateOfBirth1 = LocalDate.of(1991, 1, 1);
+        Address address1 = new Address("street1", "1", "80000", "Munich");
         Instant added1 = Instant.parse("2023-03-02T15:30:00Z");
         employee1 = new Employee(
                 "1",
@@ -49,7 +49,7 @@ class EmployeeServiceTest {
                 "00157-123-456-78",
                 added1,
                 "employee1.pdf"
-                );
+        );
 
     }
 
@@ -62,7 +62,7 @@ class EmployeeServiceTest {
         List<Employee> expected = new ArrayList<>(List.of(employee1));
         //THEN
         verify(employeeRepository).findAll();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -83,11 +83,11 @@ class EmployeeServiceTest {
         when(employeeRepository.save(employee1)).thenReturn(employee1);
         //WHEN
         Employee expected = employee1;
-        Employee actual = employeeService.addEmployee(employee1DTORequest,multipartFile);
+        Employee actual = employeeService.addEmployee(employee1DTORequest, multipartFile);
         //THEN
         verify(employeeRepository).save(employee1);
         verify(idService).generateId();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -99,7 +99,7 @@ class EmployeeServiceTest {
         Employee actual = employeeService.getEmployeeById(employee1.id());
         //THEN
         verify(employeeRepository).findById(employee1.id());
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -107,8 +107,28 @@ class EmployeeServiceTest {
         //GIVEN
         when(employeeRepository.findById("2")).thenReturn(Optional.empty());
         //WHEN & THEN
-        assertThrows(NoSuchElementException.class, () -> employeeService.getEmployeeById("2"));
+        assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployeeById("2"));
         verify(employeeRepository).findById("2");
     }
 
+    @Test
+    void deleteEmployee_whenEmployeeDoesntExist_thenThrowException() {
+        //GIVEN
+        when(employeeRepository.findById("3")).thenReturn(Optional.empty());
+        //WHEN & THEN
+        assertThrows(EmployeeNotFoundException.class, () -> employeeService.deleteEmployee("3"));
+        verify(employeeRepository).findById("3");
+    }
+
+    @Test
+    void deleteEmployee_whenEmployeeExist_thenReturnThatEmployee() {
+        //WHEN
+        when(employeeRepository.findById(employee1.id())).thenReturn(Optional.ofNullable(employee1));
+        //GIVEN
+        Employee actual = employeeService.deleteEmployee(employee1.id());
+        Employee expected = employee1;
+        //THEN
+        verify(employeeRepository).findById(employee1.id());
+        assertEquals(expected, actual);
+    }
 }
