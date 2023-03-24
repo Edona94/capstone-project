@@ -44,7 +44,7 @@ export default function EmployeeDetails(props: Props) {
             <section className={"employee-details"}>
                 <h2>Employee details</h2>
                 <ul>
-                    <a href={employee.cv} target={"_blank"}>CV</a>
+                    <a href={employee.cv} >CV</a>
                     <p>ID: {employee.id}</p>
                     <p>First name: {employee.firstName}</p>
                     <p>Last name: {employee.lastName}</p>
