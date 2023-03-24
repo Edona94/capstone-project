@@ -28,9 +28,17 @@ export default function useEmployees() {
             .catch(console.error)
     }
 
+    function deleteEmployee(id:string) {
+        return axios.delete("/api/employees/" +id)
+            .then(() => {
+            loadAllEmployees()
+            })
+            .catch(console.error)
+    }
+
     useEffect(() => {
         loadAllEmployees()
     },[])
 
-    return {employees,postNewEmployee}
+    return {employees,postNewEmployee,deleteEmployee}
 }

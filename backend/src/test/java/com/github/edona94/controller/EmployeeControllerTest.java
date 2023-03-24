@@ -168,4 +168,31 @@ class EmployeeControllerTest {
                            }
                         """));
     }
+
+    @Test
+    @DirtiesContext
+    void deleteEmployee_whenIdExist_thenReturnThatEmployee() throws Exception {
+        employeeRepository.save(employee1);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/employees/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        {
+                              "id": "1",
+                              "firstName": "Employee 1",
+                              "lastName": "LastName 1",
+                              "position": "Java Developer",
+                              "dateOfBirth": "1991-01-01",
+                              "address": {
+                                          "street": "street1",
+                                          "houseNumber": "1",
+                                          "postalCode": "80000",
+                                          "city": "Munich"
+                                        },
+                              "email": "employee1@gmail.com",
+                              "phoneNumber": "00157-123-456-78",
+                              "added": "2023-03-02T15:30:00Z",
+                              "cv": "employee1.pdf"
+                           }
+                        """));
+    }
 }

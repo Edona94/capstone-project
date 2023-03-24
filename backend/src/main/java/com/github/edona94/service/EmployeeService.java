@@ -1,5 +1,6 @@
 package com.github.edona94.service;
 
+import com.github.edona94.exception.EmployeeNotFoundException;
 import com.github.edona94.model.Employee;
 import com.github.edona94.model.EmployeeDTORequest;
 import com.github.edona94.repository.EmployeeRepository;
@@ -10,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +52,15 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(String id) {
-        return employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
+    public Employee deleteEmployee(String id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if(employee.isEmpty()) {
+            throw new EmployeeNotFoundException("Employee with id" +id+ "doesn't exist");
+        }
+        employeeRepository.deleteById(id);
+        return employee.get();
+    }
 }

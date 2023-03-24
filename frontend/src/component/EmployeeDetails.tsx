@@ -6,6 +6,7 @@ import moment from "moment";
 
 type Props = {
     employees: Employee[]
+    deleteEmployee: (id: string) => Promise<void>
 }
 
 export default function EmployeeDetails(props: Props) {
@@ -29,6 +30,11 @@ export default function EmployeeDetails(props: Props) {
     function handleBackButton() {
         navigate("/")
     }
+    function handleDeleteButton() {
+        props.deleteEmployee(id || "undefined")
+            .then(() => navigate("/"))
+            .catch(console.error)
+    }
 
     return (
         <>
@@ -38,7 +44,7 @@ export default function EmployeeDetails(props: Props) {
             <section className={"employee-details"}>
                 <h2>Employee details</h2>
                 <ul>
-                    <a href={employee.cv}>CV</a>
+                    <a href={employee.cv} target={"_blank"}>CV</a>
                     <p>ID: {employee.id}</p>
                     <p>First name: {employee.firstName}</p>
                     <p>Last name: {employee.lastName}</p>
@@ -49,6 +55,9 @@ export default function EmployeeDetails(props: Props) {
                     <p>Phone number: {employee.phoneNumber}</p>
                     <p>Added: {moment(employee.added).format("YYYY-MM-DD HH:mm")}</p>
                 </ul>
+                <div>
+                    <button className={"delete"} onClick={handleDeleteButton}>Delete</button>
+                </div>
             </section>
         </>
     );
