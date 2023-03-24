@@ -112,10 +112,13 @@ export default function AddEmployee(props: Props) {
             navigate("/employees")
         }
     }
+    function handleCancelButton(){
+        navigate("/")
+    }
 
     return (
         <>
-            <h3>Add a new Employee </h3>
+            <h2 className={"add-employee-h2"}>Add a new Employee </h2>
             <form onSubmit={formSubmitHandler} className={"add-employee"}>
                 <div>
                     <label htmlFor="firstname">First Name:</label>
@@ -170,9 +173,10 @@ export default function AddEmployee(props: Props) {
                     Upload CV:
                     <input type={'file'} onChange={handleFileChange} accept={"application/pdf"} />
                 </label>
-                <div>
-                    <button type={"submit"}>Save</button>
-                </div>
+                <menu>
+                    <li><button type={"submit"}>Save</button></li>
+                    <li><button className={"cancel"}  onClick={handleCancelButton}>Cancel</button></li>
+                </menu>
             </form>
         </>
     );

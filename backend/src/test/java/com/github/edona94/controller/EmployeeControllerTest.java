@@ -35,7 +35,7 @@ class EmployeeControllerTest {
     EmployeeRepository employeeRepository;
     @MockBean
     Cloudinary cloudinary;
-    Uploader uploader=mock(Uploader.class);
+    Uploader uploader = mock(Uploader.class);
     Employee employee1;
 
     @BeforeEach
@@ -94,30 +94,31 @@ class EmployeeControllerTest {
                         """));
 
     }
+
     @Test
     @DirtiesContext
-    void addEmployee () throws Exception {
+    void addEmployee() throws Exception {
         when(cloudinary.uploader()).thenReturn(uploader);
         when(uploader.upload(any(), anyMap())).thenReturn(Map.of("url", "employee1.pdf"));
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/employees")
-                .file(new MockMultipartFile("employeeDTORequest", null,
-                        "application/json", """   
-                        {
-                              "firstName": "Employee 1",
-                              "lastName": "LastName 1",
-                              "position": "Java Developer",
-                              "dateOfBirth": "1991-01-01",
-                              "address": {
-                                          "street": "street1",
-                                          "houseNumber": "1",
-                                          "postalCode": "80000",
-                                          "city": "Munich"
-                                        },
-                              "email": "employee1@gmail.com",
-                              "phoneNumber": "00157-123-456-78",
-                              "added": "2023-03-02T15:30:00Z"
-                           }
-                           """.getBytes()))
+                        .file(new MockMultipartFile("employeeDTORequest", null,
+                                "application/json", """   
+                                {
+                                      "firstName": "Employee 1",
+                                      "lastName": "LastName 1",
+                                      "position": "Java Developer",
+                                      "dateOfBirth": "1991-01-01",
+                                      "address": {
+                                                  "street": "street1",
+                                                  "houseNumber": "1",
+                                                  "postalCode": "80000",
+                                                  "city": "Munich"
+                                                },
+                                      "email": "employee1@gmail.com",
+                                      "phoneNumber": "00157-123-456-78",
+                                      "added": "2023-03-02T15:30:00Z"
+                                   }
+                                   """.getBytes()))
                         .file(new MockMultipartFile("file", "content".getBytes())))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -139,6 +140,32 @@ class EmployeeControllerTest {
                            }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
+    }
 
+    @Test
+    @DirtiesContext
+    void getEmployeeById() throws Exception {
+        employeeRepository.save(employee1);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/employees/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                          {
+                              "id": "1",
+                              "firstName": "Employee 1",
+                              "lastName": "LastName 1",
+                              "position": "Java Developer",
+                              "dateOfBirth": "1991-01-01",
+                              "address": {
+                                          "street": "street1",
+                                          "houseNumber": "1",
+                                          "postalCode": "80000",
+                                          "city": "Munich"
+                                        },
+                              "email": "employee1@gmail.com",
+                              "phoneNumber": "00157-123-456-78",
+                              "added": "2023-03-02T15:30:00Z",
+                              "cv": "employee1.pdf"
+                           }
+                        """));
     }
 }

@@ -4,18 +4,29 @@
     justify-content: center;
     padding: 5px;
     gap: 5px;
+    width: 80%;
+    margin: auto;
 }
 .employee-gallery button {
     background-color: #4F58AD;
     color: white;
-    padding: 10px 15px;
-    margin: 8px 0;
+    padding: 10px 10px;
+    margin:  0.3rem;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    float: right;
+    float:right;
 }
 .employee-gallery button:hover {
     background-color: blueviolet;
+}
+.employee-gallery input[type=text] {
+    width: 20%;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: 2px solid #4F58AD;
+    border-radius: 4px;
+    box-sizing: border-box;
+    float: right;
 }

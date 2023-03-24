@@ -37,8 +37,10 @@ export default function EmployeeGallery(props: Props) {
     )
     return (
         <>
-            <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
             <section className={"employee-gallery"}>
+                <div>
+                    <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
+                </div>
                 <div>
                 <button onClick={handleClick}>Add a new Employee</button>
                 </div>
