@@ -35,6 +35,9 @@ export default function EmployeeDetails(props: Props) {
             .then(() => navigate("/"))
             .catch(console.error)
     }
+    function handleEditButton(){
+        navigate("/employee/edit/"+employee?.id)
+    }
 
     return (
         <>
@@ -45,19 +48,20 @@ export default function EmployeeDetails(props: Props) {
                 <h2>Employee details</h2>
                 <ul>
                     <a href={employee.cv} >CV</a>
-                    <p>ID: {employee.id}</p>
-                    <p>First name: {employee.firstName}</p>
-                    <p>Last name: {employee.lastName}</p>
-                    <p>Position: {employee.position}</p>
-                    <p>Date of birth: {employee.dateOfBirth}</p>
-                    <p>Address: {employee.address.street}.{employee.address.houseNumber}, {employee.address.postalCode} {employee.address.city}</p>
-                    <p>E-Mail: {employee.email}</p>
-                    <p>Phone number: {employee.phoneNumber}</p>
-                    <p>Added: {moment(employee.added).format("YYYY-MM-DD HH:mm")}</p>
+                    <p><strong>ID:</strong> {employee.id}</p>
+                    <p><strong>First name:</strong> {employee.firstName}</p>
+                    <p><strong>Last name:</strong> {employee.lastName}</p>
+                    <p><strong>Position:</strong> {employee.position}</p>
+                    <p><strong>Date of birth:</strong> {employee.dateOfBirth}</p>
+                    <p><strong>Address:</strong> {employee.address.street}.{employee.address.houseNumber}, {employee.address.postalCode} {employee.address.city}</p>
+                    <p><strong>E-Mail:</strong> {employee.email}</p>
+                    <p><strong>Phone number:</strong> {employee.phoneNumber}</p>
+                    <p><strong>Added:</strong> {moment(employee.added).format("YYYY-MM-DD HH:mm")}</p>
                 </ul>
-                <div>
-                    <button className={"delete"} onClick={handleDeleteButton}>Delete</button>
-                </div>
+                <menu>
+                    <li><button onClick={handleEditButton}>Edit</button></li>
+                    <li><button className={"delete"} onClick={handleDeleteButton}>Delete</button></li>
+                </menu>
             </section>
         </>
     );
