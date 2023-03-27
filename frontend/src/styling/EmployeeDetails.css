@@ -41,11 +41,19 @@
     font-weight: bold;
     float: right;
 }
+.employee-details menu {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 0;
+    gap: 1em;
+}
 
-.employee-details button.delete {
+.employee-details menu button.delete {
     background-color: brown;
 }
 
-.employee-details button.delete:hover {
+.employee-details menu button.delete:hover {
     background-color: #ba052b;
 }

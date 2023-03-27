@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
@@ -167,6 +168,55 @@ class EmployeeControllerTest {
                               "cv": "employee1.pdf"
                            }
                         """));
+    }
+
+    @Test
+    @DirtiesContext
+    void  updateEmployeeById_whenIdExist_ReturnUpdatedEmployee() throws Exception {
+        employeeRepository.save(employee1);
+        when(cloudinary.uploader()).thenReturn(uploader);
+        when(uploader.upload(any(), anyMap())).thenReturn(Map.of("url", "employee1.pdf"));
+        mockMvc.perform(MockMvcRequestBuilders.multipart(HttpMethod.PUT,"/api/employees/1")
+                .file(new MockMultipartFile("employeeDTORequest", null,
+                        "application/json", """   
+                                {
+                                      "firstName": "Employee 1",
+                                      "lastName": "LastName 1",
+                                      "position": "Java Developer",
+                                      "dateOfBirth": "1991-01-01",
+                                      "address": {
+                                                  "street": "street1",
+                                                  "houseNumber": "1",
+                                                  "postalCode": "80000",
+                                                  "city": "Munich"
+                                                },
+                                      "email": "updated_email@gmail.com",
+                                      "phoneNumber": "00157-123-456-78",
+                                      "added": "2023-03-02T15:30:00Z"
+                                   }
+                                   """.getBytes()))
+                .file(new MockMultipartFile("file", "content".getBytes())))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                               {
+                               "id": "1",
+                              "firstName": "Employee 1",
+                              "lastName": "LastName 1",
+                              "position": "Java Developer",
+                              "dateOfBirth": "1991-01-01",
+                              "address": {
+                                          "street": "street1",
+                                          "houseNumber": "1",
+                                          "postalCode": "80000",
+                                          "city": "Munich"
+                                        },
+                              "email": "updated_email@gmail.com",
+                              "phoneNumber": "00157-123-456-78",
+                              "added": "2023-03-02T15:30:00Z",
+                              "cv": "employee1.pdf"
+                           }
+                        """))
+                .andExpect(jsonPath("$.id").isNotEmpty());
     }
 
     @Test

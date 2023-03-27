@@ -31,9 +31,13 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
+    @PutMapping("/{id}")
+    public Employee updateEmployeeById(@PathVariable String id,@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest,@RequestPart(value = "file", required = false) MultipartFile cv){
+        return employeeService.updateEmployeeById(id,employeeDTORequest,cv);
+    }
+
     @DeleteMapping("/{id}")
     public Employee deleteEmployee(@PathVariable String id) {
         return employeeService.deleteEmployee(id);
     }
-
 }

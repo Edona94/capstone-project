@@ -24,8 +24,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee addEmployee(EmployeeDTORequest employeeDTORequest, MultipartFile cv) {
-        String id = idService.generateId();
+    public String uploadCv(MultipartFile cv) {
         String cvUri;
         if (cv != null) {
             try {
@@ -36,6 +35,12 @@ public class EmployeeService {
         } else {
             cvUri = null;
         }
+        return cvUri;
+    }
+
+    public Employee addEmployee(EmployeeDTORequest employeeDTORequest, MultipartFile cv) {
+        String id = idService.generateId();
+        String cvUri = uploadCv(cv);
         Employee newEmployee = new Employee(
                 id,
                 employeeDTORequest.firstName(),
@@ -53,6 +58,29 @@ public class EmployeeService {
 
     public Employee getEmployeeById(String id) {
         return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+    }
+
+    public Employee updateEmployeeById(String id, EmployeeDTORequest employeeDTORequest, MultipartFile cv) {
+        Employee employee = getEmployeeById(id);
+        String cvUri = employee.cv(); // Set the cvUri to the existing CV URI by default
+
+        if(cv != null && !cv.isEmpty()) { // Check if a new CV file has been provided
+            cvUri = uploadCv(cv); // If yes, upload the new CV and update the cvUri
+        }
+
+        Employee updatedEmployee = new Employee(
+                id,
+                employeeDTORequest.firstName(),
+                employeeDTORequest.lastName(),
+                employeeDTORequest.position(),
+                employeeDTORequest.dateOfBirth(),
+                employeeDTORequest.address(),
+                employeeDTORequest.email(),
+                employeeDTORequest.phoneNumber(),
+                employeeDTORequest.added(),
+                cvUri
+        );
+        return employeeRepository.save(updatedEmployee);
     }
 
     public Employee deleteEmployee(String id) {

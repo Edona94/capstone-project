@@ -10,6 +10,7 @@ type Props = {
 export default function EmployeeGallery(props: Props) {
 
     const [filter, setFilter] = useState("")
+    const [sortedByFirstName, setSortedByFirstName] = useState(false);
     const navigate = useNavigate();
     function handleClick() {
         navigate("/employee/add")
@@ -31,10 +32,15 @@ export default function EmployeeGallery(props: Props) {
         setFilter(event.target.value)
     }
 
-    const employeeCards = filteredList.map((employee) => {
-            return <EmployeeCard key={employee.id} employee={employee}/>
-        }
-    )
+    function sortEmployeesByName() {
+        return [...props.employees].sort((a, b) =>
+            a.firstName.localeCompare(b.firstName)
+        );
+    }
+
+    const employeeCards = (sortedByFirstName ? sortEmployeesByName() : filteredList).map((employee) => {
+        return <EmployeeCard key={employee.id} employee={employee} />;
+    });
     return (
         <>
             <section className={"employee-gallery"}>
@@ -43,6 +49,8 @@ export default function EmployeeGallery(props: Props) {
                 </div>
                 <div>
                 <button onClick={handleClick}>Add a new Employee</button>
+                    <button onClick={() => setSortedByFirstName(!sortedByFirstName)}>Sort by First Name</button>
+                    <p>Number of Employees: {props.employees.length}</p>
                 </div>
                 {employeeCards.length > 0 ? employeeCards : "No employees yet"}
             </section>
