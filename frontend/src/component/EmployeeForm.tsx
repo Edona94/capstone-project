@@ -177,7 +177,7 @@ export default function EmployeeForm(props: Props) {
                 </div>
                 <label>
                     E-Mail:
-                    <input type={"text"} onChange={handleEmailChange} value={email} placeholder={"e-mail"}
+                    <input type={"email"} onChange={handleEmailChange} value={email} placeholder={"e-mail"}
                            required={true}/>
                 </label>
                 <label>
