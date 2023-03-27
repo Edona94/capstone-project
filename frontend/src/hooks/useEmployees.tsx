@@ -6,7 +6,7 @@ import moment from "moment";
 
 export default function useEmployees() {
 
-    const [employees,setEmployees] =useState<Employee[]>([]);
+    const [employees,setEmployees] = useState<Employee[]>([]);
 
     function loadAllEmployees() {
         axios.get<Employee[]>("/api/employees")
@@ -21,10 +21,34 @@ export default function useEmployees() {
             return;
         }
         payload.append('file', file);
-        payload.append("employeeDTORequest",new Blob([JSON.stringify({...newEmployee, added :moment(newEmployee.added)})],{type:"application/json"}));
-        return axios.post("/api/employees" ,payload)
+        payload.append("employeeDTORequest", new Blob([JSON.stringify({
+            ...newEmployee,
+            added: moment(newEmployee.added)
+        })], {type: "application/json"}));
+        return axios.post("/api/employees", payload)
             .then(response => response.data)
             .then(data => setEmployees(prevState => [...prevState,data]))
+            .catch(console.error)
+    }
+
+    function updateEmployee(employee: Employee, file?: File) {
+        const payload = new FormData();
+        payload.set('file', file ? file : "");
+        payload.append("employeeDTORequest", new Blob([JSON.stringify({
+            ...employee,
+            added: moment(employee.added)
+        })], {type: "application/json"}));
+        return axios.put("/api/employees/" + employee.id, payload)
+            .then(response => response.data)
+            .then(data => setEmployees(prevState => {
+                    return prevState.map(currentEmployee => {
+                        if (currentEmployee.id === employee.id) {
+                            return data
+                        }
+                        return currentEmployee
+                    })
+                }
+            ))
             .catch(console.error)
     }
 
@@ -40,5 +64,5 @@ export default function useEmployees() {
         loadAllEmployees()
     },[])
 
-    return {employees,postNewEmployee,deleteEmployee}
+    return {employees, postNewEmployee, updateEmployee, deleteEmployee}
 }
