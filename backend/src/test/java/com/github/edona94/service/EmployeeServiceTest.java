@@ -112,7 +112,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void updateEmployeeById_whenIdExist_ReturnUpdatedEmployee() {
+    void updateEmployeeById_whenIdExist_ReturnUpdatedEmployee() throws IOException {
         //GIVEN
         EmployeeDTORequest employeeDTORequest = new EmployeeDTORequest(
                 employee1.firstName(),
@@ -134,16 +134,14 @@ class EmployeeServiceTest {
                 employeeDTORequest.phoneNumber(),
                 employeeDTORequest.added(),
                 employee1.cv());
-        try {
-            when(cvService.uploadCV(multipartFile)).thenReturn(employee1.cv());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        when(cvService.uploadCV(multipartFile)).thenReturn(employee1.cv());
+
         when(employeeRepository.findById(employee1.id())).thenReturn(Optional.of(employee1));
         when(employeeRepository.save(updatedEmployee)).thenReturn(updatedEmployee);
         //WHEN
         Employee expected = updatedEmployee;
-        Employee actual = employeeService.updateEmployeeById(employee1.id(),employeeDTORequest,multipartFile);
+        Employee actual = employeeService.updateEmployeeById(employee1.id(), employeeDTORequest, multipartFile);
         //THEN
         verify(employeeRepository).findById(employee1.id());
         verify(employeeRepository).save(updatedEmployee);
