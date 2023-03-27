@@ -7,10 +7,12 @@ import moment from "moment";
 
 type Props = {
     employee: Employee
-    onEdit: (employee: Employee, file?: File) => void
+    onSubmit: (employee: Employee, file?: File) => void
+    action: "add" | "update"
+    navigateTo: string | undefined
 }
 
-export default function EditEmployeeForm(props: Props) {
+export default function EmployeeForm(props: Props) {
 
     const [firstName, setFirstName] = useState<string>(props.employee.firstName)
     const [lastName, setLastName] = useState<string>(props.employee.lastName)
@@ -99,7 +101,7 @@ export default function EditEmployeeForm(props: Props) {
     function formSubmitHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const payload = new FormData();
-        payload.set('file', file? file:"");
+        payload.set('file', file ? file : "");
         const editEmployee: Employee = {
             firstName,
             lastName,
@@ -110,28 +112,31 @@ export default function EditEmployeeForm(props: Props) {
             phoneNumber,
             added,
         }
-
         if (props.employee.id) {
             editEmployee.id = props.employee.id
         }
 
-         if(file) {
-             props.onEdit(editEmployee, file)
-             navigate("/employee/" + props.employee.id)
-         }
-         else {
-             props.onEdit(editEmployee)
-             navigate("/employee/" + props.employee.id)
-         }
+        if (file) {
+            props.onSubmit(editEmployee, file)
+            if (props.navigateTo) {
+                navigate(props.navigateTo)
+            }
+        } else {
+            props.onSubmit(editEmployee)
+            if (props.navigateTo) {
+                navigate(props.navigateTo)
+            }
+        }
     }
 
     function handleCancelButton() {
-        navigate("/employee/" + props.employee.id)
+        if (props.navigateTo) {
+            navigate(props.navigateTo)
+        }
     }
 
     return (
         <>
-            <h2 className={"add-employee-h2"}>Edit Employee data </h2>
             <form onSubmit={formSubmitHandler} className={"add-employee"}>
                 <div>
                     <label htmlFor="firstname">First Name:</label>
@@ -194,7 +199,10 @@ export default function EditEmployeeForm(props: Props) {
                 </label>
                 <menu>
                     <li>
-                        <button type={"submit"}>Save Changes</button>
+                        <button type={"submit"}>
+                            {props.action === "add" && "Save"}
+                            {props.action === "update" && "Save changes"}
+                        </button>
                     </li>
                     <li>
                         <button className={"cancel"} onClick={handleCancelButton}>Cancel</button>

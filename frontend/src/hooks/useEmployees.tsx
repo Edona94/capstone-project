@@ -15,12 +15,9 @@ export default function useEmployees() {
             .catch(console.error)
     }
 
-    function postNewEmployee(newEmployee: Employee, file: File) {
+    function postNewEmployee(newEmployee: Employee, file?: File) {
         const payload = new FormData();
-        if (!file) {
-            return;
-        }
-        payload.append('file', file);
+        payload.set('file', file ? file : "");
         payload.append("employeeDTORequest", new Blob([JSON.stringify({
             ...newEmployee,
             added: moment(newEmployee.added)
