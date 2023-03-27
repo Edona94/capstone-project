@@ -112,6 +112,45 @@ class EmployeeServiceTest {
     }
 
     @Test
+    void updateEmployeeById_whenIdExist_ReturnUpdatedEmployee() {
+        //GIVEN
+        EmployeeDTORequest employeeDTORequest = new EmployeeDTORequest(
+                employee1.firstName(),
+                employee1.lastName(),
+                employee1.position(),
+                employee1.dateOfBirth(),
+                employee1.address(),
+                "e.@gmail.com",
+                "00157-123-456-22",
+                employee1.added());
+        Employee updatedEmployee = new Employee(
+                employee1.id(),
+                employeeDTORequest.firstName(),
+                employeeDTORequest.lastName(),
+                employeeDTORequest.position(),
+                employeeDTORequest.dateOfBirth(),
+                employeeDTORequest.address(),
+                employeeDTORequest.email(),
+                employeeDTORequest.phoneNumber(),
+                employeeDTORequest.added(),
+                employee1.cv());
+        try {
+            when(cvService.uploadCV(multipartFile)).thenReturn(employee1.cv());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        when(employeeRepository.findById(employee1.id())).thenReturn(Optional.of(employee1));
+        when(employeeRepository.save(updatedEmployee)).thenReturn(updatedEmployee);
+        //WHEN
+        Employee expected = updatedEmployee;
+        Employee actual = employeeService.updateEmployeeById(employee1.id(),employeeDTORequest,multipartFile);
+        //THEN
+        verify(employeeRepository).findById(employee1.id());
+        verify(employeeRepository).save(updatedEmployee);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void deleteEmployee_whenEmployeeDoesntExist_thenThrowException() {
         //GIVEN
         when(employeeRepository.findById("3")).thenReturn(Optional.empty());
