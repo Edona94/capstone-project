@@ -36,6 +36,8 @@ public class SecurityConfig {
                 .sessionManagement(config ->
                         config.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.GET, "/api/employees").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/employees/{id}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/csrf").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .requestMatchers("/api/**").authenticated()
