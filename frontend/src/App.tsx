@@ -6,6 +6,7 @@ import EmployeeGallery from "./component/EmployeeGallery";
 import AddEmployee from "./component/AddEmployee";
 import EmployeeDetails from "./component/EmployeeDetails";
 import EditEmployee from "./component/EditEmployee";
+import Footer from "./component/Footer";
 
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path={"/employee/:id"} element={<EmployeeDetails employees={employees} deleteEmployee={deleteEmployee}/>}/>
           <Route path={"/employee/edit/:id"} element={<EditEmployee employees={employees} onEdit={updateEmployee}/>}/>
          </Routes>
+        <Footer/>
     </div>
   );
 }

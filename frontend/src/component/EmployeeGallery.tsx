@@ -3,6 +3,7 @@ import EmployeeCard from "./EmployeeCard";
 import "../styling/EmployeeGallery.css";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import Layout from "./Layout";
 
 type Props = {
     employees: Employee[]
@@ -42,7 +43,7 @@ export default function EmployeeGallery(props: Props) {
         return <EmployeeCard key={employee.id} employee={employee} />;
     });
     return (
-        <>
+        <Layout>
             <section className={"employee-gallery"}>
                 <div>
                     <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
@@ -54,6 +55,6 @@ export default function EmployeeGallery(props: Props) {
                 </div>
                 {employeeCards.length > 0 ? employeeCards : "No employees yet"}
             </section>
-        </>
+        </Layout>
     )
 }

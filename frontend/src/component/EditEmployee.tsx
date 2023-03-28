@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Employee} from "../model/Employee";
 import axios from "axios";
 import EmployeeForm from "./EmployeeForm";
+import Layout from "./Layout";
 
 type Props = {
     employees: Employee[]
@@ -32,11 +33,12 @@ export default function EditEmployee(props: Props) {
         )
     }
     return (
-        <>
+        <Layout>
+            <h2 className={"add-employee-h2"}>Edit Employee data</h2>
             <EmployeeForm employee={employee}
                           onSubmit={props.onEdit}
                           action={"update"}
                           navigateTo={"/employee/" + employeeId}/>
-        </>
+        </Layout>
     )
 }

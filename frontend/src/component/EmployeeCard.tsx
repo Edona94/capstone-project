@@ -15,10 +15,10 @@ export default function EmployeeCard(props:EmployeeCardProps) {
     return(
         <>
         <div className={"employee-card"}>
-            <p>{props.employee.firstName} {props.employee.lastName}  ID: {props.employee.id}</p>
             <div>
-                Added: {moment(props.employee.added).format("YYYY-MM-DD HH:mm")}
                 <button onClick={handleDetailsButton}>Details</button>
+                <p>{props.employee.firstName} {props.employee.lastName}</p>
+                Added: {moment(props.employee.added).format("YYYY-MM-DD HH:mm")}
             </div>
         </div>
         </>

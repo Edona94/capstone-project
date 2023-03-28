@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {Employee} from "../model/Employee";
 import "../styling/EmployeeDetails.css"
 import moment from "moment";
+import Layout from "./Layout";
 
 type Props = {
     employees: Employee[]
@@ -40,7 +41,7 @@ export default function EmployeeDetails(props: Props) {
     }
 
     return (
-        <>
+        <Layout>
             <div>
                 <button className={"back"} onClick={handleBackButton}>Back</button>
             </div>
@@ -63,6 +64,6 @@ export default function EmployeeDetails(props: Props) {
                     <li><button className={"delete"} onClick={handleDeleteButton}>Delete</button></li>
                 </menu>
             </section>
-        </>
+        </Layout>
     );
 }
