@@ -1,0 +1,32 @@
+.header {
+    display: grid;
+    padding: 0 15px;
+    background-color: rgba(198,198,198,0.3);
+    position: -webkit-sticky;
+}
+
+.nav {
+    float: right;
+}
+.nav button {
+    background-color: #AB8F47;
+    color: white;
+    padding: 5px 9px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: normal;
+    float: right;
+}
+
+.nav button:hover {
+    background-color:#AB8F60;
+}
+
+.footer{
+    padding-top: 10px;
+    justify-content: center;
+    bottom: 0;
+    display: grid;
+}
