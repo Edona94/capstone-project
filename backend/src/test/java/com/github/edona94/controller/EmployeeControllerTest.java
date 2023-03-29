@@ -62,9 +62,10 @@ class EmployeeControllerTest {
                 "employee1@gmail.com",
                 "00157-123-456-78",
                 added1,
-                "employee1.pdf"
+                "employee1.pdf",
+                "1a"
         );
-        mongoUser = new MongoUser("a","user","password","BASIC");
+        mongoUser = new MongoUser("1a","user","password","BASIC");
     }
 
     @Test
@@ -128,7 +129,8 @@ class EmployeeControllerTest {
                                                 },
                                       "email": "employee1@gmail.com",
                                       "phoneNumber": "00157-123-456-78",
-                                      "added": "2023-03-02T15:30:00Z"
+                                      "added": "2023-03-02T15:30:00Z",
+                                      "userId": "1a"
                                    }
                                    """.getBytes()))
                         .file(new MockMultipartFile("file", "content".getBytes()))
@@ -149,7 +151,8 @@ class EmployeeControllerTest {
                               "email": "employee1@gmail.com",
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
-                              "cv": "employee1.pdf"
+                              "cv": "employee1.pdf",
+                              "userId": "1a"
                            }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
