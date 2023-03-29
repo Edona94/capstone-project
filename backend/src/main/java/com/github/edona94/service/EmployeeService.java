@@ -99,7 +99,7 @@ public class EmployeeService {
             throw new EmployeeNotFoundException("Employee with id" +id+ "doesn't exist");
         }
         if(!employee.get().userId().equals(adminId)){
-            throw new UnauthorizedException("You may only delete your own tasks!");
+            throw new UnauthorizedException("Only Admin can delete an employee");
         }
         employeeRepository.deleteById(id);
         return employee.get();
