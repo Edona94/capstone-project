@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee addEmployee(@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest,@RequestPart(value = "file", required = false) MultipartFile cv) {
-        return employeeService.addEmployee(employeeDTORequest,cv);
+    public Employee addEmployee(@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest, @RequestPart(value = "file", required = false) MultipartFile cv, Principal principal) {
+        return employeeService.addEmployee(employeeDTORequest,cv,principal);
     }
 
     @GetMapping("/{id}")
@@ -32,12 +33,12 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployeeById(@PathVariable String id,@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest,@RequestPart(value = "file", required = false) MultipartFile cv){
-        return employeeService.updateEmployeeById(id,employeeDTORequest,cv);
+    public Employee updateEmployeeById(@PathVariable String id,@RequestPart("employeeDTORequest") EmployeeDTORequest employeeDTORequest,@RequestPart(value = "file", required = false) MultipartFile cv,Principal principal){
+        return employeeService.updateEmployeeById(id,employeeDTORequest,cv,principal);
     }
 
     @DeleteMapping("/{id}")
-    public Employee deleteEmployee(@PathVariable String id) {
-        return employeeService.deleteEmployee(id);
+    public Employee deleteEmployee(@PathVariable String id, Principal principal) {
+        return employeeService.deleteEmployee(id,principal);
     }
 }

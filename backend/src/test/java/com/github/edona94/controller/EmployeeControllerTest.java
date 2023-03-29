@@ -4,7 +4,9 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
 import com.github.edona94.model.Address;
 import com.github.edona94.model.Employee;
+import com.github.edona94.model.MongoUser;
 import com.github.edona94.repository.EmployeeRepository;
+import com.github.edona94.repository.MongoUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -25,6 +28,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -38,6 +42,10 @@ class EmployeeControllerTest {
     Cloudinary cloudinary;
     Uploader uploader = mock(Uploader.class);
     Employee employee1;
+    @Autowired
+    MongoUserRepository mongoUserRepository;
+
+    MongoUser mongoUser;
 
     @BeforeEach
     void setUp() {
@@ -54,8 +62,10 @@ class EmployeeControllerTest {
                 "employee1@gmail.com",
                 "00157-123-456-78",
                 added1,
-                "employee1.pdf"
+                "employee1.pdf",
+                "1a"
         );
+        mongoUser = new MongoUser("1a","user","password","BASIC");
     }
 
     @Test
@@ -98,7 +108,9 @@ class EmployeeControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void addEmployee() throws Exception {
+        mongoUserRepository.save(mongoUser);
         when(cloudinary.uploader()).thenReturn(uploader);
         when(uploader.upload(any(), anyMap())).thenReturn(Map.of("url", "employee1.pdf"));
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/employees")
@@ -117,10 +129,12 @@ class EmployeeControllerTest {
                                                 },
                                       "email": "employee1@gmail.com",
                                       "phoneNumber": "00157-123-456-78",
-                                      "added": "2023-03-02T15:30:00Z"
+                                      "added": "2023-03-02T15:30:00Z",
+                                      "userId": "1a"
                                    }
                                    """.getBytes()))
-                        .file(new MockMultipartFile("file", "content".getBytes())))
+                        .file(new MockMultipartFile("file", "content".getBytes()))
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                                {
@@ -137,7 +151,8 @@ class EmployeeControllerTest {
                               "email": "employee1@gmail.com",
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
-                              "cv": "employee1.pdf"
+                              "cv": "employee1.pdf",
+                              "userId": "1a"
                            }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
@@ -172,7 +187,9 @@ class EmployeeControllerTest {
 
     @Test
     @DirtiesContext
-    void  updateEmployeeById_whenIdExist_ReturnUpdatedEmployee() throws Exception {
+    @WithMockUser
+    void updateEmployeeById_whenIdExist_ReturnUpdatedEmployee() throws Exception {
+        mongoUserRepository.save(mongoUser);
         employeeRepository.save(employee1);
         when(cloudinary.uploader()).thenReturn(uploader);
         when(uploader.upload(any(), anyMap())).thenReturn(Map.of("url", "employee1.pdf"));
@@ -195,7 +212,8 @@ class EmployeeControllerTest {
                                       "added": "2023-03-02T15:30:00Z"
                                    }
                                    """.getBytes()))
-                .file(new MockMultipartFile("file", "content".getBytes())))
+                .file(new MockMultipartFile("file", "content".getBytes()))
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                                {
@@ -221,9 +239,12 @@ class EmployeeControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void deleteEmployee_whenIdExist_thenReturnThatEmployee() throws Exception {
+        mongoUserRepository.save(mongoUser);
         employeeRepository.save(employee1);
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/employees/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/employees/1")
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
