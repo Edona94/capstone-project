@@ -7,8 +7,17 @@ import AddEmployee from "./component/AddEmployee";
 import EmployeeDetails from "./component/EmployeeDetails";
 import EditEmployee from "./component/EditEmployee";
 import Footer from "./component/Footer";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-
+axios.interceptors.request.use(function (config) {
+    return fetch("/api/csrf").then(() => {
+        config.headers["X-XSRF-TOKEN"] = Cookies.get("XSRF-TOKEN");
+        return config;
+    });
+}, function (error) {
+    return Promise.reject(error);
+});
 
 function App() {
   const {employees,postNewEmployee,updateEmployee,deleteEmployee} = useEmployees()
