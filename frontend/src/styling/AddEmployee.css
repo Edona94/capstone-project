@@ -7,7 +7,9 @@
     margin: auto auto 20px;
     padding: 30px;
 }
-
+.add-employee :focus-visible {
+    outline: 1px solid lightgrey;
+}
 .add-employee input{
     width: auto;
     padding: 12px 20px;
