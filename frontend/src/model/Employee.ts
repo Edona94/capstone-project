@@ -15,5 +15,6 @@ export type Employee = {
     email: string,
     phoneNumber: string,
     added: Date,
-    cv?:string
+    cv?:string,
+    userId?:string
 }
