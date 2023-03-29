@@ -18,6 +18,7 @@ public record Employee(
         String email,
         String phoneNumber,
         Instant added,
-        String cv
+        String cv,
+        String userId
 ) {
 }
