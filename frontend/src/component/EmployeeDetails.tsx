@@ -4,6 +4,8 @@ import {Employee} from "../model/Employee";
 import "../styling/EmployeeDetails.css"
 import moment from "moment";
 import Layout from "./Layout";
+import useAuth from "../hooks/useAuth";
+
 
 type Props = {
     employees: Employee[]
@@ -11,6 +13,7 @@ type Props = {
 }
 
 export default function EmployeeDetails(props: Props) {
+    const {isAdmin} = useAuth(false)
     const params = useParams()
     const id = params.id
     const [employee, setEmployee] = useState<Employee | undefined>()
@@ -48,7 +51,7 @@ export default function EmployeeDetails(props: Props) {
             <section className={"employee-details"}>
                 <h2>Employee details</h2>
                 <ul>
-                    <a href={employee.cv} >CV</a>
+                    {isAdmin ? <a href={employee.cv} >CV</a> :null}
                     <p><strong>ID:</strong> {employee.id}</p>
                     <p><strong>First name:</strong> {employee.firstName}</p>
                     <p><strong>Last name:</strong> {employee.lastName}</p>
@@ -59,10 +62,14 @@ export default function EmployeeDetails(props: Props) {
                     <p><strong>Phone number:</strong> {employee.phoneNumber}</p>
                     <p><strong>Added:</strong> {moment(employee.added).format("YYYY-MM-DD HH:mm")}</p>
                 </ul>
+                {isAdmin ?
                 <menu>
                     <li><button onClick={handleEditButton}>Edit</button></li>
                     <li><button className={"delete"} onClick={handleDeleteButton}>Delete</button></li>
                 </menu>
+                    :
+                    null
+                }
             </section>
         </Layout>
     );
