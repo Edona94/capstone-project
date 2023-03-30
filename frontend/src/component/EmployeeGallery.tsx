@@ -4,11 +4,15 @@ import "../styling/EmployeeGallery.css";
 import {ChangeEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Layout from "./Layout";
+import useAuth from "../hooks/useAuth";
+
 
 type Props = {
     employees: Employee[]
 }
 export default function EmployeeGallery(props: Props) {
+    const {isAdmin} = useAuth(false)
+    const user = useAuth(true)
 
     const [filter, setFilter] = useState("")
     const [sortedByFirstName, setSortedByFirstName] = useState(false);
@@ -42,14 +46,16 @@ export default function EmployeeGallery(props: Props) {
     const employeeCards = (sortedByFirstName ? sortEmployeesByName() : filteredList).map((employee) => {
         return <EmployeeCard key={employee.id} employee={employee} />;
     });
-    return (
+    return !user ? null: (
         <Layout>
             <section className={"employee-gallery"}>
                 <div>
                     <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
                 </div>
                 <div>
-                <button onClick={handleClick}>Add a new Employee</button>
+                    {isAdmin && (
+                        <button onClick={handleClick}>Add a new Employee</button>
+                    )}
                     <button onClick={() => setSortedByFirstName(!sortedByFirstName)}>Sort by First Name</button>
                     <p>Number of Employees: {props.employees.length}</p>
                 </div>
