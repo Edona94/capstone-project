@@ -10,6 +10,7 @@ import Footer from "./component/Footer";
 import axios from "axios";
 import Cookies from "js-cookie";
 import SignUpPage from "./component/SignUpPage";
+import SignInPage from "./component/SignInPage";
 
 axios.interceptors.request.use(function (config) {
     return fetch("/api/csrf").then(() => {
@@ -27,6 +28,7 @@ function App() {
       <Routes>
           <Route path={"/"} element={<EmployeeGallery employees={employees}/>}/>
           <Route path={"/sign-up"} element={<SignUpPage/>}/>
+          <Route path={"/sign-in"} element={<SignInPage/>}/>
           <Route path={"/employees"} element={<EmployeeGallery employees={employees}/>}/>
           <Route path={"/employee/add"} element={<AddEmployee onAdd={postNewEmployee}/>}/>
           <Route path={"/employee/:id"} element={<EmployeeDetails employees={employees} deleteEmployee={deleteEmployee}/>}/>

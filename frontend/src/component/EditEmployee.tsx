@@ -4,6 +4,8 @@ import {Employee} from "../model/Employee";
 import axios from "axios";
 import EmployeeForm from "./EmployeeForm";
 import Layout from "./Layout";
+import useAuth from "../hooks/useAuth";
+
 
 type Props = {
     employees: Employee[]
@@ -11,6 +13,7 @@ type Props = {
 }
 
 export default function EditEmployee(props: Props) {
+    const isAdmin = useAuth(false)
     const params = useParams()
     const employeeId: string | undefined = params.id;
     const [employee, setEmployee] = useState<Employee | undefined>();
@@ -32,7 +35,7 @@ export default function EditEmployee(props: Props) {
             <h2>Sorry, no employee with id {employeeId} found!</h2>
         )
     }
-    return (
+    return !isAdmin ? null : (
         <Layout>
             <h2 className={"add-employee-h2"}>Edit Employee data</h2>
             <EmployeeForm employee={employee}
@@ -40,5 +43,5 @@ export default function EditEmployee(props: Props) {
                           action={"update"}
                           navigateTo={"/employee/" + employeeId}/>
         </Layout>
-    )
+    );
 }
