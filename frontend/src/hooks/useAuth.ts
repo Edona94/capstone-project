@@ -1,12 +1,13 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
 import {User} from "../model/User";
+import {useLocation, useNavigate} from "react-router-dom";
+import axios from "axios";
 
 export default function useAuth (redirectToSignIn?: boolean) {
     const [user, setUser] = useState<User | undefined>(undefined);
     const navigate = useNavigate();
     const {pathname} = useLocation();
+    const isAdmin:boolean = user?.role === "ADMIN"
 
     useEffect(() => {
         axios.get("/api/users/me").then(res => {
@@ -19,5 +20,5 @@ export default function useAuth (redirectToSignIn?: boolean) {
         });
     }, [pathname, navigate, redirectToSignIn]);
 
-    return user;
+    return {user,isAdmin};
 }
