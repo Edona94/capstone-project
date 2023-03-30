@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function Navigation() {
-    const user = useAuth(false)
+    const {user} = useAuth(false)
     const location = useLocation()
 
     function handleLogOutClick() {
