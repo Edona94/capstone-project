@@ -19,7 +19,7 @@ export default function EmployeeGallery(props: Props) {
     const [sortedByFirstName, setSortedByFirstName] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [employeesPerPage] = useState(2); // Show 3 employees per page
+    const [employeesPerPage] = useState(5);
 
     const navigate = useNavigate();
     function handleClick() {
@@ -40,7 +40,7 @@ export default function EmployeeGallery(props: Props) {
 
     function handleFilterChange(event: ChangeEvent<HTMLInputElement>) {
         setFilter(event.target.value)
-        setCurrentPage(1); // reset current page to 1 when filter changes
+        setCurrentPage(1);
     }
 
     function sortEmployeesByName() {
