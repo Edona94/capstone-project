@@ -1,5 +1,5 @@
 .add-employee{
-    width: 80%;
+    width:90%;
     display:grid;
     border-radius: 5px;
     background-color: rgba(198,198,198,0.1);
@@ -11,7 +11,7 @@
     outline: 1px solid lightgrey;
 }
 .add-employee input{
-    width: auto;
+    width:auto;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;

@@ -1,8 +1,11 @@
-.main-content {
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
 .App {
-  overflow: hidden;
+  height: 100vh;
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.App > *:not(header, footer) {
+  flex-grow: 1;
 }
