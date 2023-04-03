@@ -2,9 +2,10 @@ import {Employee} from "../model/Employee";
 import EmployeeCard from "./EmployeeCard";
 import "../styling/EmployeeGallery.css";
 import {ChangeEvent, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Layout from "./Layout";
 import useAuth from "../hooks/useAuth";
+import '../styling/Pagination.css'
 
 
 type Props = {
@@ -16,6 +17,10 @@ export default function EmployeeGallery(props: Props) {
 
     const [filter, setFilter] = useState("")
     const [sortedByFirstName, setSortedByFirstName] = useState(false);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [employeesPerPage] = useState(2); // Show 3 employees per page
+
     const navigate = useNavigate();
     function handleClick() {
         navigate("/employee/add")
@@ -35,6 +40,7 @@ export default function EmployeeGallery(props: Props) {
 
     function handleFilterChange(event: ChangeEvent<HTMLInputElement>) {
         setFilter(event.target.value)
+        setCurrentPage(1); // reset current page to 1 when filter changes
     }
 
     function sortEmployeesByName() {
@@ -42,10 +48,33 @@ export default function EmployeeGallery(props: Props) {
             a.firstName.localeCompare(b.firstName)
         );
     }
+    const sortedList = sortedByFirstName ? sortEmployeesByName() : filteredList;
 
-    const employeeCards = (sortedByFirstName ? sortEmployeesByName() : filteredList).map((employee) => {
+    const indexOfLastEmployee = currentPage * employeesPerPage;
+    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+    const currentEmployees = sortedList.slice(
+        indexOfFirstEmployee,
+        indexOfLastEmployee
+    );
+
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+    const employeeCards = currentEmployees.map((employee) => {
         return <EmployeeCard key={employee.id} employee={employee} />;
     });
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(sortedList.length / employeesPerPage); i++) {
+        pageNumbers.push(i);
+    }
+    const lastPage = Math.ceil(sortedList.length / employeesPerPage);
+    const nextPage = () => {
+        if (currentPage < lastPage) setCurrentPage(currentPage + 1);
+    };
+    const prevPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+
     return !user ? null: (
         <Layout>
             <section className={"employee-gallery"}>
@@ -59,7 +88,24 @@ export default function EmployeeGallery(props: Props) {
                     <button onClick={() => setSortedByFirstName(!sortedByFirstName)}>Sort by First Name</button>
                     <p>Number of Employees: {props.employees.length}</p>
                 </div>
-                {employeeCards.length > 0 ? employeeCards : "No employees yet"}
+                {employeeCards.length > 0 ? (
+                    <>
+                        {employeeCards}
+                        <div className="pagination">
+                            <Link to="#" onClick={prevPage}>&laquo;</Link>
+                            {pageNumbers.map((number) => (
+                                <Link key={number} to="#" onClick={() => paginate(number)}
+                                      className={currentPage === number ? "active" : ""}
+                                >
+                                    {number}
+                                </Link>
+                            ))}
+                            <Link to='#' onClick={nextPage}>&raquo;</Link>
+                        </div>
+                    </>
+                ) : (
+                    "No employees yet"
+                )}
             </section>
         </Layout>
     )
