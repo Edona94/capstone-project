@@ -1,0 +1,26 @@
+@media screen and (max-width: 1680px) {
+    .chart-container {
+        margin: auto;
+        width:18%;
+        box-sizing: border-box;
+        padding-left: 15px;
+        padding-right: 15px;
+        justify-content: center;
+        display: flex;
+        float: left;
+        border: 1px solid rgba(198, 198, 198, 0.3);
+    }
+}
+@media screen and (max-width: 430px) {
+    .chart-container {
+        margin: auto;
+        width: 50%;
+        box-sizing: border-box;
+        padding-left: 15px;
+        padding-right: 10px;
+        justify-content: center;
+        display: flex;
+        float: left;
+        border: 1px solid rgba(198, 198, 198, 0.3);
+    }
+}
