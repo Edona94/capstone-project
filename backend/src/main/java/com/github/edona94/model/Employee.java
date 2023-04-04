@@ -19,6 +19,7 @@ public record Employee(
         String phoneNumber,
         Instant added,
         String cv,
+        Gender gender,
         String userId
 ) {
 }
