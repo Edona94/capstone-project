@@ -4,6 +4,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
 import com.github.edona94.model.Address;
 import com.github.edona94.model.Employee;
+import com.github.edona94.model.Gender;
 import com.github.edona94.model.MongoUser;
 import com.github.edona94.repository.EmployeeRepository;
 import com.github.edona94.repository.MongoUserRepository;
@@ -63,6 +64,7 @@ class EmployeeControllerTest {
                 "00157-123-456-78",
                 added1,
                 "employee1.pdf",
+                Gender.FEMALE,
                 "1a"
         );
         mongoUser = new MongoUser("1a","user","password","BASIC");
@@ -99,7 +101,8 @@ class EmployeeControllerTest {
                               "email": "employee1@gmail.com",
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
-                              "cv": "employee1.pdf"
+                              "cv": "employee1.pdf",
+                              "gender": "FEMALE"
                            }
                         ]
                         """));
@@ -130,6 +133,7 @@ class EmployeeControllerTest {
                                       "email": "employee1@gmail.com",
                                       "phoneNumber": "00157-123-456-78",
                                       "added": "2023-03-02T15:30:00Z",
+                                      "gender": "FEMALE",
                                       "userId": "1a"
                                    }
                                    """.getBytes()))
@@ -152,6 +156,7 @@ class EmployeeControllerTest {
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
+                              "gender": "FEMALE",
                               "userId": "1a"
                            }
                         """))
@@ -180,7 +185,8 @@ class EmployeeControllerTest {
                               "email": "employee1@gmail.com",
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
-                              "cv": "employee1.pdf"
+                              "cv": "employee1.pdf",
+                              "gender": "FEMALE"
                            }
                         """));
     }
@@ -209,7 +215,8 @@ class EmployeeControllerTest {
                                                 },
                                       "email": "updated_email@gmail.com",
                                       "phoneNumber": "00157-123-456-78",
-                                      "added": "2023-03-02T15:30:00Z"
+                                      "added": "2023-03-02T15:30:00Z",
+                                      "gender": "FEMALE"
                                    }
                                    """.getBytes()))
                 .file(new MockMultipartFile("file", "content".getBytes()))
@@ -231,7 +238,8 @@ class EmployeeControllerTest {
                               "email": "updated_email@gmail.com",
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
-                              "cv": "employee1.pdf"
+                              "cv": "employee1.pdf",
+                              "gender": "FEMALE"
                            }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
@@ -262,7 +270,8 @@ class EmployeeControllerTest {
                               "email": "employee1@gmail.com",
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
-                              "cv": "employee1.pdf"
+                              "cv": "employee1.pdf",
+                              "gender": "FEMALE"
                            }
                         """));
     }
