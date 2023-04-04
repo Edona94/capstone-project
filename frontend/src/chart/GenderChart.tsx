@@ -1,7 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Employee} from "../model/Employee";
 import {Doughnut} from "react-chartjs-2";
-import {useEffect, useState} from "react";
 import {Chart as ChartJS, Tooltip, Legend, ArcElement, ChartOptions, Title,} from "chart.js";
 import './Chart.css'
 
