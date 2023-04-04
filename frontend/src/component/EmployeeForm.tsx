@@ -3,6 +3,7 @@ import {Employee, Address} from "../model/Employee";
 import {useNavigate} from "react-router-dom";
 import "../styling/AddEmployee.css"
 import moment from "moment";
+import {Gender} from "../model/Gender";
 
 
 type Props = {
@@ -28,6 +29,7 @@ export default function EmployeeForm(props: Props) {
     const [phoneNumber, setPhoneNumber] = useState<string>(props.employee.phoneNumber)
     const [added, setAdded] = useState<Date>(props.employee.added)
     const [file, setFile] = React.useState<File | undefined>(undefined);
+    const [gender,setGender] = useState(props.employee.gender)
 
     const navigate = useNavigate()
 
@@ -97,6 +99,15 @@ export default function EmployeeForm(props: Props) {
             setFile(event.target.files[0]);
         }
     }
+    const genderOptions = new Map([
+        [Gender.MALE, "Male"],
+        [Gender.FEMALE, "Female"]
+    ]);
+
+    function handleGenderChange(event: ChangeEvent<HTMLInputElement>) {
+        setGender(event.target.value as Gender);
+    }
+
 
     function formSubmitHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -111,6 +122,7 @@ export default function EmployeeForm(props: Props) {
             email,
             phoneNumber,
             added,
+            gender
         }
         if (props.employee.id) {
             editEmployee.id = props.employee.id
@@ -160,6 +172,23 @@ export default function EmployeeForm(props: Props) {
                     <label>Date of birth: </label>
                     <input type={"date"} onChange={handleDateOfBirthChange} value={dateOfBirth}
                            placeholder={"date of birth"} required={true}/>
+                </div>
+                <div>
+                    <label htmlFor="gender">Gender:</label>
+                    {Array.from(genderOptions, ([value, label]) => (
+                        <div key={value}>
+                            <input
+                                type="radio"
+                                id={value}
+                                name="gender"
+                                value={value}
+                                onChange={handleGenderChange}
+                                checked={gender === value}
+                                required
+                            />
+                            <label htmlFor={value}>{label}</label>
+                        </div>
+                    ))}
                 </div>
                 <div>
                     <label>
