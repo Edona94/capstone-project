@@ -13,6 +13,7 @@ public record EmployeeDTORequest(
         String email,
         String phoneNumber,
         Instant added,
-        Gender gender
+        Gender gender,
+        String department
 ) {
 }

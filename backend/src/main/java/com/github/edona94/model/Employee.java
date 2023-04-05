@@ -20,6 +20,7 @@ public record Employee(
         Instant added,
         String cv,
         Gender gender,
+        String department,
         String userId
 ) {
 }
