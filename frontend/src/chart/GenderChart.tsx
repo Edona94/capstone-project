@@ -37,7 +37,7 @@ const GenderChart = (props: Props) => {
             datasets: [
                 {
                     data: [percentageMale, percentageFemale],
-                    backgroundColor: ["#3C77BC", "rgba(200,66,120,0.8)"],
+                    backgroundColor: ["rgba(4,90,220,0.7)", "rgba(200,66,120,0.7)"],
                 },
             ],
         });
@@ -54,6 +54,14 @@ const GenderChart = (props: Props) => {
                         return `${label}: ${formattedValue}`;
                     }
                 }
+            },
+            datalabels: {
+                display: true,
+                anchor: "end",
+                align: "start",
+                offset:20,
+                formatter: (value) => value +'%',
+                font: { size: 9, weight: "bold"},
             },
             title: {
                 display: true,
@@ -90,7 +98,7 @@ const GenderChart = (props: Props) => {
         cutout: '65%'
     };
     return (
-        <div className="chart-container">
+        <div className="chart-container" style={{ height: "200px"}}>
             {chartData && <Doughnut data={chartData} options={options}/>}
         </div>
     );
