@@ -23,9 +23,9 @@
 }
 .employee-gallery input[type=text] {
     width: 150px;
-    padding: 10px 15px;
+    padding: 7px 10px;
     margin: 8px 0;
-    border: 2px solid  rgba(44,92,175,0.91);
+    border: 2px solid rgba(198, 198, 198);
     border-radius: 4px;
     box-sizing: border-box;
     float: right;
@@ -34,12 +34,10 @@
 @media screen and (max-width: 430px) {
     .chart {
         padding-top: 15px;
-        padding-left: 2.5rem;
     }
 }
 @media screen and (max-width: 1680px) {
     .chart {
         padding-top: 15px;
-        padding-left: 4.5rem;
     }
 }
