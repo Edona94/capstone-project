@@ -21,7 +21,8 @@ export default function AddEmployee(props: Props) {
                 <EmployeeForm employee={{
                     firstName: "", lastName: "", position: "", dateOfBirth: "",
                     address: {street: "", houseNumber: "", postalCode: "", city: ""},
-                    email: "", phoneNumber: "", added: new Date(),gender: Gender.FEMALE || Gender.MALE
+                    email: "", phoneNumber: "", added: new Date(),gender: Gender.FEMALE || Gender.MALE,
+                    department:""
                 }}
                               onSubmit={props.onAdd}
                               action={"add"}
