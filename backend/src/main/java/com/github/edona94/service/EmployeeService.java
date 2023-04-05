@@ -57,6 +57,7 @@ public class EmployeeService {
                 employeeDTORequest.added(),
                 cvUri,
                 employeeDTORequest.gender(),
+                employeeDTORequest.department(),
                 adminId
         );
         return employeeRepository.save(newEmployee);
@@ -89,6 +90,7 @@ public class EmployeeService {
                 employeeDTORequest.added(),
                 cvUri,
                 employeeDTORequest.gender(),
+                employeeDTORequest.department(),
                 adminId
         );
         return employeeRepository.save(updatedEmployee);

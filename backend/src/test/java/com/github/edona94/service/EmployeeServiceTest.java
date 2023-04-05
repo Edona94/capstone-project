@@ -53,6 +53,7 @@ class EmployeeServiceTest {
                 added1,
                 "employee1.pdf",
                 Gender.FEMALE,
+                "Software Development",
                 "a"
         );
 
@@ -84,7 +85,8 @@ class EmployeeServiceTest {
                 employee1.email(),
                 employee1.phoneNumber(),
                 employee1.added(),
-                employee1.gender()
+                employee1.gender(),
+                employee1.department()
         );
         when(employeeRepository.save(employee1)).thenReturn(employee1);
         when(mongoUserDetailsService.getMe(principal)).thenReturn(new MongoUserResponse("a","",""));
@@ -131,7 +133,8 @@ class EmployeeServiceTest {
                 "e.@gmail.com",
                 "00157-123-456-22",
                 employee1.added(),
-                employee1.gender());
+                employee1.gender(),
+                employee1.department());
         Employee updatedEmployee = new Employee(
                 employee1.id(),
                 employeeDTORequest.firstName(),
@@ -144,6 +147,7 @@ class EmployeeServiceTest {
                 employeeDTORequest.added(),
                 employee1.cv(),
                 employeeDTORequest.gender(),
+                employeeDTORequest.department(),
                 "a");
 
         when(cvService.uploadCV(multipartFile)).thenReturn(employee1.cv());

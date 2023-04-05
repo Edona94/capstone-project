@@ -65,6 +65,7 @@ class EmployeeControllerTest {
                 added1,
                 "employee1.pdf",
                 Gender.FEMALE,
+                "Software Development",
                 "1a"
         );
         mongoUser = new MongoUser("1a","user","password","BASIC");
@@ -102,7 +103,8 @@ class EmployeeControllerTest {
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
-                              "gender": "FEMALE"
+                              "gender": "FEMALE",
+                              "department": "Software Development"
                            }
                         ]
                         """));
@@ -134,6 +136,7 @@ class EmployeeControllerTest {
                                       "phoneNumber": "00157-123-456-78",
                                       "added": "2023-03-02T15:30:00Z",
                                       "gender": "FEMALE",
+                                      "department": "Software Development",
                                       "userId": "1a"
                                    }
                                    """.getBytes()))
@@ -157,6 +160,7 @@ class EmployeeControllerTest {
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
                               "gender": "FEMALE",
+                              "department": "Software Development",
                               "userId": "1a"
                            }
                         """))
@@ -186,7 +190,8 @@ class EmployeeControllerTest {
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
-                              "gender": "FEMALE"
+                              "gender": "FEMALE",
+                              "department": "Software Development"
                            }
                         """));
     }
@@ -216,7 +221,8 @@ class EmployeeControllerTest {
                                       "email": "updated_email@gmail.com",
                                       "phoneNumber": "00157-123-456-78",
                                       "added": "2023-03-02T15:30:00Z",
-                                      "gender": "FEMALE"
+                                      "gender": "FEMALE",
+                                      "department": "Software Development"
                                    }
                                    """.getBytes()))
                 .file(new MockMultipartFile("file", "content".getBytes()))
@@ -239,7 +245,8 @@ class EmployeeControllerTest {
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
-                              "gender": "FEMALE"
+                              "gender": "FEMALE",
+                              "department": "Software Development"
                            }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
@@ -271,7 +278,8 @@ class EmployeeControllerTest {
                               "phoneNumber": "00157-123-456-78",
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
-                              "gender": "FEMALE"
+                              "gender": "FEMALE",
+                              "department": "Software Development"
                            }
                         """));
     }
