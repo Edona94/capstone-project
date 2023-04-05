@@ -18,6 +18,7 @@ export type Employee = {
     phoneNumber: string,
     added: Date,
     cv?:string,
-    gender:Gender
+    gender:Gender,
+    department: string,
     userId?:string
 }
