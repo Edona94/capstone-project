@@ -30,6 +30,7 @@ export default function EmployeeForm(props: Props) {
     const [added, setAdded] = useState<Date>(props.employee.added)
     const [file, setFile] = React.useState<File | undefined>(undefined);
     const [gender,setGender] = useState(props.employee.gender)
+    const [department,setDepartment] = useState(props.employee.department)
 
     const navigate = useNavigate()
 
@@ -107,6 +108,9 @@ export default function EmployeeForm(props: Props) {
     function handleGenderChange(event: ChangeEvent<HTMLInputElement>) {
         setGender(event.target.value as Gender);
     }
+    function handleDepartmentChange(event: ChangeEvent<HTMLSelectElement>) {
+        setDepartment(event.target.value)
+    }
 
 
     function formSubmitHandler(event: FormEvent<HTMLFormElement>) {
@@ -122,7 +126,8 @@ export default function EmployeeForm(props: Props) {
             email,
             phoneNumber,
             added,
-            gender
+            gender,
+            department
         }
         if (props.employee.id) {
             editEmployee.id = props.employee.id
@@ -162,6 +167,18 @@ export default function EmployeeForm(props: Props) {
                     <input type={"text"} id="lastname" name="lastname" onChange={handleLastNameChange} value={lastName}
                            placeholder={"lastname"}
                            required={true}/>
+                </div>
+                <div>
+                    <label>Department:</label>
+                    <select name={"department"} value={department} required={true} onChange={handleDepartmentChange}>
+                        <option value="" disabled>Choose a department</option>
+                        <option value={"Engineering"}>Engineering</option>
+                        <option value={"Software Development"}>Software Development</option>
+                        <option value={"IT"}>IT</option>
+                        <option value={"Finance"}>Finance</option>
+                        <option value={"Human Resources"}>Human Resources</option>
+                        <option value={"Sales"}>Sales</option>
+                    </select>
                 </div>
                 <div>
                     <label>Position:</label>
