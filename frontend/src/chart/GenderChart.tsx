@@ -28,16 +28,20 @@ const GenderChart = (props: Props) => {
         const totalFemale = props.employees.filter(
             (employee) => employee.gender === "FEMALE"
         ).length;
+        const totalOther = props.employees.filter(
+            (employee) => employee.gender === "OTHER"
+        ).length;
 
         const percentageMale = Math.round((totalMale / totalEmployees) * 100);
         const percentageFemale = Math.round((totalFemale / totalEmployees) * 100);
+        const percentageOther = Math.round((totalOther / totalEmployees) * 100);
 
         setChartData({
-            labels: ["Male", "Female"],
+            labels: ["Male", "Female", "Other"],
             datasets: [
                 {
-                    data: [percentageMale, percentageFemale],
-                    backgroundColor: ["rgba(4,90,220,0.7)", "rgba(200,66,120,0.7)"],
+                    data: [percentageMale, percentageFemale,percentageOther],
+                    backgroundColor: ["rgba(4,90,220,0.7)", "rgba(200,66,120,0.7)", "rgba(20,124,120,0.7)"],
                 },
             ],
         });
@@ -61,9 +65,9 @@ const GenderChart = (props: Props) => {
                 display: true,
                 anchor: "end",
                 align: "start",
-                offset:20,
+                offset:16,
                 formatter: (value) => value +'%',
-                font: { size: 9, weight: "bold"},
+                font: { size: 8, weight: "bold"},
             },
             title: {
                 display: true,
@@ -100,7 +104,7 @@ const GenderChart = (props: Props) => {
         cutout: '65%'
     };
     return (
-        <div className="chart-container" style={{ height: "200px" ,width:"200px"}}>
+        <div className="chart-container" style={{ height: "200px" ,width:"215px"}}>
             {chartData && <Doughnut data={chartData} options={options}/>}
         </div>
     );
