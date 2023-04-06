@@ -102,7 +102,8 @@ export default function EmployeeForm(props: Props) {
     }
     const genderOptions = new Map([
         [Gender.MALE, "Male"],
-        [Gender.FEMALE, "Female"]
+        [Gender.FEMALE, "Female"],
+        [Gender.OTHER, "Other"]
     ]);
 
     function handleGenderChange(event: ChangeEvent<HTMLInputElement>) {
