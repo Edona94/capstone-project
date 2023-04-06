@@ -138,7 +138,7 @@ const DepartmentChart = (props: Props) => {
     };
 
     return (
-        <div className="chart-container1" style={{ height: "200px" }}>
+        <div className="chart-container1" style={{ height: "200px",width:"370px" }}>
             {chartData && <Bar data={chartData} options={options}/>}
         </div>
     );
