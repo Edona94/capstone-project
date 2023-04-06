@@ -1,10 +1,7 @@
 package com.github.edona94.service;
 
 import com.github.edona94.exception.EmployeeNotFoundException;
-import com.github.edona94.model.Address;
-import com.github.edona94.model.Employee;
-import com.github.edona94.model.EmployeeDTORequest;
-import com.github.edona94.model.MongoUserResponse;
+import com.github.edona94.model.*;
 import com.github.edona94.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,6 +52,8 @@ class EmployeeServiceTest {
                 "00157-123-456-78",
                 added1,
                 "employee1.pdf",
+                Gender.FEMALE,
+                "Software Development",
                 "a"
         );
 
@@ -85,7 +84,9 @@ class EmployeeServiceTest {
                 employee1.address(),
                 employee1.email(),
                 employee1.phoneNumber(),
-                employee1.added()
+                employee1.added(),
+                employee1.gender(),
+                employee1.department()
         );
         when(employeeRepository.save(employee1)).thenReturn(employee1);
         when(mongoUserDetailsService.getMe(principal)).thenReturn(new MongoUserResponse("a","",""));
@@ -131,7 +132,9 @@ class EmployeeServiceTest {
                 employee1.address(),
                 "e.@gmail.com",
                 "00157-123-456-22",
-                employee1.added());
+                employee1.added(),
+                employee1.gender(),
+                employee1.department());
         Employee updatedEmployee = new Employee(
                 employee1.id(),
                 employeeDTORequest.firstName(),
@@ -142,8 +145,10 @@ class EmployeeServiceTest {
                 employeeDTORequest.email(),
                 employeeDTORequest.phoneNumber(),
                 employeeDTORequest.added(),
-                employee1.cv()
-        ,      "a");
+                employee1.cv(),
+                employeeDTORequest.gender(),
+                employeeDTORequest.department(),
+                "a");
 
         when(cvService.uploadCV(multipartFile)).thenReturn(employee1.cv());
 

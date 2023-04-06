@@ -12,6 +12,8 @@ public record EmployeeDTORequest(
         Address address,
         String email,
         String phoneNumber,
-        Instant added
+        Instant added,
+        Gender gender,
+        String department
 ) {
 }

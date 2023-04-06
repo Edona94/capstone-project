@@ -4,6 +4,7 @@ import EmployeeForm from "./EmployeeForm";
 import {Employee} from "../model/Employee";
 import Layout from "./Layout";
 import useAuth from "../hooks/useAuth";
+import {Gender} from "../model/Gender";
 
 
 type Props = {
@@ -20,7 +21,8 @@ export default function AddEmployee(props: Props) {
                 <EmployeeForm employee={{
                     firstName: "", lastName: "", position: "", dateOfBirth: "",
                     address: {street: "", houseNumber: "", postalCode: "", city: ""},
-                    email: "", phoneNumber: "", added: new Date()
+                    email: "", phoneNumber: "", added: new Date(),gender: Gender.FEMALE || Gender.MALE || Gender.OTHER,
+                    department:""
                 }}
                               onSubmit={props.onAdd}
                               action={"add"}

@@ -1,3 +1,5 @@
+import {Gender} from "./Gender";
+
 export type Address = {
     street: string,
     houseNumber: string,
@@ -16,5 +18,7 @@ export type Employee = {
     phoneNumber: string,
     added: Date,
     cv?:string,
+    gender:Gender,
+    department: string,
     userId?:string
 }

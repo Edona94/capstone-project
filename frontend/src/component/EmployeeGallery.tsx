@@ -6,6 +6,8 @@ import {Link, useNavigate} from "react-router-dom";
 import Layout from "./Layout";
 import useAuth from "../hooks/useAuth";
 import '../styling/Pagination.css'
+import GenderChart from "../chart/GenderChart";
+import DepartmentChart from "../chart/DepartmentChart";
 
 
 type Props = {
@@ -77,6 +79,12 @@ export default function EmployeeGallery(props: Props) {
 
     return !user ? null: (
         <Layout>
+            <div className={"chart"}>
+                <GenderChart employees={props.employees}/>
+            </div>
+            <div className={"department-chart"}>
+                <DepartmentChart employees={props.employees}/>
+            </div>
             <section className={"employee-gallery"}>
                 <div>
                     <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
