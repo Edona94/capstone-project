@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect,useState} from "react";
 import {Employee} from "../model/Employee";
 import {Doughnut} from "react-chartjs-2";
 import {Chart as ChartJS, Tooltip, Legend, ArcElement, ChartOptions, Title,} from "chart.js";
@@ -44,6 +44,8 @@ const GenderChart = (props: Props) => {
     }, [props.employees]);
 
     const options: ChartOptions<'doughnut'> = {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             tooltip: {
                 callbacks: {
@@ -98,7 +100,7 @@ const GenderChart = (props: Props) => {
         cutout: '65%'
     };
     return (
-        <div className="chart-container" style={{ height: "200px"}}>
+        <div className="chart-container" style={{ height: "200px" ,width:"200px"}}>
             {chartData && <Doughnut data={chartData} options={options}/>}
         </div>
     );
