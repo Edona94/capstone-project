@@ -49,19 +49,50 @@ export default function EmployeeDetails(props: Props) {
                 <button className={"back"} onClick={handleBackButton}>Back</button>
             </div>
             <section className={"employee-details"}>
-                <h2>Employee details</h2>
-                <ul>
+                <h3>Employee <span>details</span></h3>
                     {isAdmin ? <a href={employee.cv} >CV</a> :null}
-                    <p><strong>ID:</strong> {employee.id}</p>
-                    <p><strong>First name:</strong> {employee.firstName}</p>
-                    <p><strong>Last name:</strong> {employee.lastName}</p>
-                    <p><strong>Position:</strong> {employee.position}</p>
-                    <p><strong>Date of birth:</strong> {employee.dateOfBirth}</p>
-                    <p><strong>Address:</strong> {employee.address.street}.{employee.address.houseNumber}, {employee.address.postalCode} {employee.address.city}</p>
-                    <p><strong>E-Mail:</strong> {employee.email}</p>
-                    <p><strong>Phone number:</strong> {employee.phoneNumber}</p>
-                    <p><strong>Added:</strong> {moment(employee.added).format("YYYY-MM-DD HH:mm")}</p>
-                </ul>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">ID:</div>
+                        <div className="employee-details__value">{employee.id}</div>
+                    </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Name:</div>
+                        <div className="employee-details__value">{employee.firstName} {employee.lastName}</div>
+                    </div>
+                <div className="employee-details__section">
+                    <div className="employee-details__label">Department:</div>
+                    <div className="employee-details__value">{employee.department}</div>
+                </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Position:</div>
+                        <div className="employee-details__value">{employee.position}</div>
+                    </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Date of birth:</div>
+                        <div className="employee-details__value">{employee.dateOfBirth}</div>
+                    </div>
+                <div className="employee-details__section">
+                    <div className="employee-details__label">Gender:</div>
+                    <div className="employee-details__value">{employee.gender}</div>
+                </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Address:</div>
+                        <div className="employee-details__value">{employee.address.street} {employee.address.houseNumber}, {employee.address.postalCode} {employee.address.city}</div>
+                    </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Email:</div>
+                        <div className="employee-details__value">{employee.email}</div>
+                    </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Phone number:</div>
+                        <div className="employee-details__value">{employee.phoneNumber}</div>
+                    </div>
+                    <div className="employee-details__section">
+                        <div className="employee-details__label">Entry date:</div>
+                        <div className="employee-details__value">{moment(employee.added).format("YYYY-MM-DD")}</div>
+                    </div>
+
+
                 {isAdmin ?
                 <menu>
                     <li><button onClick={handleEditButton}>Edit</button></li>

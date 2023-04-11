@@ -63,11 +63,11 @@ const GenderChart = (props: Props) => {
             },
             datalabels: {
                 display: true,
-                anchor: "end",
+                anchor: "start",
                 align: "start",
-                offset:16,
+                offset:-2,
                 formatter: (value) => value +'%',
-                font: { size: 8, weight: "bold"},
+                font: { size: 8, weight: "bold"}
             },
             title: {
                 display: true,
@@ -84,7 +84,7 @@ const GenderChart = (props: Props) => {
                     font: {
                         size: 12
                     },
-                    borderRadius: 5,
+                    borderRadius: 5
                 }
             },
         },
@@ -98,13 +98,13 @@ const GenderChart = (props: Props) => {
         },
         elements: {
             arc: {
-                borderWidth: 1,
+                borderWidth: 1
             }
         },
         cutout: '65%'
     };
     return (
-        <div className="chart-container" style={{ height: "200px" ,width:"215px"}}>
+        <div className="chart-container" >
             {chartData && <Doughnut data={chartData} options={options}/>}
         </div>
     );

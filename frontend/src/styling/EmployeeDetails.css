@@ -1,22 +1,12 @@
-.employee-details {
-    width:340px;
-    display:grid;
-    border-radius: 5px;
-    background-color: rgba(198,198,198,0.1);
-    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin: 70px auto 10px;
-}
-.employee-details h2 {
-    justify-content: center;
-    display: flex;
-}
+
 .employee-details a {
     text-decoration: none;
     font-weight: bold;
+    margin-left: 25px;
 }
+
 .back {
-    background-color: #4F58AD;
+    background-color: rgba(79,88,173,0.95);
     color: white;
     padding: 8px 12px;
     margin:  0.3rem;
@@ -27,16 +17,16 @@
     float:left;
 }
 .back:hover {
-    background-color: blueviolet;
+    background-color: rgba(79,88,173,0.9);
 }
 
 .employee-details button {
-    background-color: #4F58AD;
+    background-color: rgba(79,88,173,0.95);
     color: white;
-    padding:8px 12px;
+    padding:6px 8px;
     margin: 8px 0;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     float: right;
@@ -51,12 +41,51 @@
 }
 
 .employee-details menu button.delete {
-    background-color: brown;
+    background-color: white;
+    color: #4F58AD;
+    border: 2px solid rgba(79,88,173,0.8);
+    padding: 4px 8px;
 }
 
 .employee-details menu button.delete:hover {
-    background-color: #ba052b;
+    background-color:rgba(79,88,173,0.9);
+    color:white;
 }
 .employee-details button:hover{
-    background-color: blueviolet;
+    background-color:rgba(79,88,173,0.9);
+}
+
+.employee-details {
+    width: 700px;
+    margin: 70px auto;
+    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.employee-details h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.employee-details__section {
+    display: flex;
+    margin-bottom: 12px;
+    margin-top: 15px;
+    border-bottom: 1px solid rgba(198,198,198,0.4);
+}
+
+.employee-details__label {
+    font-weight: bold;
+    min-width: 120px;
+    margin-left: 25px;
+}
+
+.employee-details__value {
+    flex: 1;
+    margin-left: 120px;
+}
+.employee-details span {
+    color: #4F58AD;
 }

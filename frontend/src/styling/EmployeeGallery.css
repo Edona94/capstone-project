@@ -4,27 +4,101 @@
     justify-content: center;
     padding: 5px 5px 15px;
     gap: 5px;
-    width: 90%;
-    margin: auto;
+    margin-left: 50px;
+    margin-right: 50px;
 }
-.employee-gallery button {
-    background-color: rgba(44,92,175,0.91);
-    color: white;
-    padding: 7px 10px;
-    margin:  0.3rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight:bold;
-    float:right;
+
+@media screen and (max-width: 430px) {
+    .employee-gallery {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        width: 100%;
+        margin: 12px auto auto;
+    }
 }
+
+@media screen and (min-width: 430px) {
+    .employee-gallery .button-add {
+        margin-left: 150px;
+        margin-top: 25px;
+        background-color: white;
+        color:rgba(79,88,173,0.95);
+        padding: 6px 8px;
+        border: 2px solid rgba(79,88,173,0.8);
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        float: left;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .employee-gallery .button-add {
+        margin-top: 2px;
+        background-color: white;
+        color: rgba(79,88,173,0.95);
+        padding: 6px 8px;
+        border: 2px solid rgba(79,88,173,0.8);
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        float: left;
+    }
+}
+
+@media screen and (min-width: 430px) {
+    .employee-gallery button {
+        background-color: white;
+        color: rgba(79,88,173,0.95);
+        padding: 6px 8px;
+        margin-right: 0.3rem;
+        border: 2px solid rgba(79,88,173,0.8);
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        float: right;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .employee-gallery button {
+        background-color: white;
+        color: rgba(79,88,173,0.95);
+        padding: 5px 8px;
+        margin-right: 0.1rem;
+        margin-top: 0.1rem;
+        border: 2px solid rgba(79,88,173,0.8);
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        float: right;
+    }
+}
+
 .employee-gallery button:hover {
-    background-color: rgba(44,92,188,0.88);
+    background-color: rgba(79,88,173,0.95);
+    color: white;
 }
+
+.employee-gallery a {
+    text-decoration: none;
+    color: #4F58AD;
+}
+.employee-gallery a:hover {
+   color:darkgoldenrod;
+}
+
+@media screen and (min-width: 430px) {
+    .employee-gallery p {
+        margin-left: 150px;
+    }
+}
+
 .employee-gallery input[type=text] {
     width: 150px;
-    padding: 7px 10px;
-    margin: 8px 0;
+    padding: 6px 10px;
+    margin-right: 150px;
     border: 2px solid rgba(198, 198, 198);
     border-radius: 4px;
     box-sizing: border-box;
@@ -32,12 +106,74 @@
 }
 
 @media screen and (max-width: 430px) {
-    .chart {
-        padding-top: 15px;
+    .employee-gallery input[type=text] {
+        width: 150px;
+        padding: 5px 8px;
+        margin: 0.1rem;
+        border: 2px solid rgba(198, 198, 198);
+        border-radius: 4px;
+        box-sizing: border-box;
+        float: right;
     }
 }
-@media screen and (max-width: 1680px) {
-    .chart {
-        padding-top: 15px;
+
+:focus-visible {
+    outline: #4F58AD auto 1px;
+}
+
+@media screen and (max-width: 430px) {
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        margin-left: 2px;
     }
+}
+
+@media screen and (min-width: 430px) {
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding:10px;
+}
+
+.link {
+    width: 100px;
+}
+
+@media screen and (max-width: 430px) {
+    .position{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .added {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .td-added {
+        display: none;
+    }
+}
+
+th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    text-align: left;
+    background-color: rgba(79,88,173,0.95);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }

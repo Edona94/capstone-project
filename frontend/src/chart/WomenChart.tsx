@@ -13,6 +13,7 @@ import {
     CategoryScale,
     BarElement
 } from "chart.js";
+import {Gender} from "../model/Gender";
 
 ChartJS.register(
     Tooltip, LinearScale, CategoryScale, BarElement, Legend, Title,  ChartDataLabels )
@@ -32,27 +33,31 @@ const DepartmentChart = (props: Props) => {
             borderWidth: number;
         }[];
     }>();
-
     useEffect(() => {
         const departments = ['Engineering', 'Software Development', 'IT', 'Finance', 'Human Resources', 'Sales'];
-        const data = departments.map(department => {
+
+        const femaleCounts = departments.map(department => {
             const employeesInDepartment = props.employees.filter(employee => employee.department === department);
-            const count = employeesInDepartment.length;
+            const femaleEmployees = employeesInDepartment.filter(employee => employee.gender === Gender.FEMALE);
+            const femaleCount = femaleEmployees.length;
+            const totalCount = employeesInDepartment.length;
+            const percentage = Math.round((femaleCount / totalCount) * 100);
             return {
                 department,
-                count
-            }
+                percentage
+            };
         });
 
-        data.sort((a, b) => a.department.localeCompare(b.department));
-        const labels = data.map(d => d.department);
-        const counts = data.map(d => d.count);
 
+femaleCounts.sort((a, b) =>
+    a.department.localeCompare(b.department));
+        const labels = femaleCounts.map(d => d.department);
+        const counts = femaleCounts.map(d => d.percentage);
         setChartData({
             labels,
             datasets: [
                 {
-                    label: "Employees by Department",
+                    label: "Women percentage by role",
                     barThickness: 30,
                     data: counts,
                     backgroundColor: [
@@ -63,7 +68,7 @@ const DepartmentChart = (props: Props) => {
                         "rgba(153, 102, 255, 0.8)",
                         "rgba(255, 159, 78, 0.8)",
                     ],
-                    borderWidth: 1,
+                    borderWidth: 1
                 },
             ],
         });
@@ -75,11 +80,12 @@ const DepartmentChart = (props: Props) => {
         plugins: {
             title: {
                 display: true,
-                text: "Employees by Department",
-                font: {size: 10}
+                text: "Women percentage by role",
+                font: {size: 10},
+                padding:{bottom:15,top:12}
             },
             legend: {
-               display:false
+                display:false
             },
             tooltip: {
                 callbacks: {
@@ -95,7 +101,7 @@ const DepartmentChart = (props: Props) => {
                 anchor: "end",
                 align: "top",
                 offset: -3,
-                formatter: (value) => value,
+                formatter: (value) => value+ '%',
                 font: { size: 9, weight: "bold"}
             },
         },
@@ -105,7 +111,7 @@ const DepartmentChart = (props: Props) => {
                 beginAtZero: true,
                 ticks: {
                     stepSize: 1,
-                    maxTicksLimit: 100,
+                    maxTicksLimit: 10,
                     font: {
                         size: 10
                     }
@@ -127,26 +133,31 @@ const DepartmentChart = (props: Props) => {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 1,
-                    maxTicksLimit: 100
+                    stepSize: 5,
+                    maxTicksLimit: 5,
+                    callback: (value) => `${value}%`,
+                    font: {
+                        size: 9
+                    }
                 },
                 title: {
                     display: true,
-                    text: 'Employee Count',
+                    text: 'Women percentage',
                     color: 'black',
                     font: {
                         size: 7,
                         weight: 'bold'
                     },
                     align: 'center',
-                    padding:6
-                }
+                    padding:7
+                },
+
             }
         }
     };
 
     return (
-        <div className="chart-container1" >
+        <div className="chart-container1">
             {chartData && <Bar data={chartData} options={options}/>}
         </div>
     );

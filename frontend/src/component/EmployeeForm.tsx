@@ -29,8 +29,8 @@ export default function EmployeeForm(props: Props) {
     const [phoneNumber, setPhoneNumber] = useState<string>(props.employee.phoneNumber)
     const [added, setAdded] = useState<Date>(props.employee.added)
     const [file, setFile] = React.useState<File | undefined>(undefined);
-    const [gender,setGender] = useState(props.employee.gender)
-    const [department,setDepartment] = useState(props.employee.department)
+    const [gender, setGender] = useState(props.employee.gender)
+    const [department, setDepartment] = useState(props.employee.department)
 
     const navigate = useNavigate()
 
@@ -109,6 +109,7 @@ export default function EmployeeForm(props: Props) {
     function handleGenderChange(event: ChangeEvent<HTMLInputElement>) {
         setGender(event.target.value as Gender);
     }
+
     function handleDepartmentChange(event: ChangeEvent<HTMLSelectElement>) {
         setDepartment(event.target.value)
     }
@@ -156,94 +157,116 @@ export default function EmployeeForm(props: Props) {
     return (
         <>
             <form onSubmit={formSubmitHandler} className={"add-employee"}>
-                <div>
-                    <label htmlFor="firstname">First Name:</label>
-
-                    <input type={"text"} id="firstName" name="firstname" onChange={handleFirstNameChange}
-                           value={firstName} placeholder={"firstname"}
-                           required={true}/>
+                <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>First Name:</span>
+                        <input type={"text"} id="firstName" name="firstname" onChange={handleFirstNameChange}
+                               value={firstName} placeholder={"firstname"}
+                               required={true}/>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}> Last Name: </span>
+                        <input type={"text"} id="lastname" name="lastname" onChange={handleLastNameChange}
+                               value={lastName}
+                               placeholder={"lastname"}
+                               required={true}/>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor={lastName}> Last Name: </label>
-                    <input type={"text"} id="lastname" name="lastname" onChange={handleLastNameChange} value={lastName}
-                           placeholder={"lastname"}
-                           required={true}/>
+                <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Department:</span>
+                        <select name={"department"} value={department} required={true}
+                                onChange={handleDepartmentChange}>
+                            <option value="" disabled>Choose a department</option>
+                            <option value={"Engineering"}>Engineering</option>
+                            <option value={"Software Development"}>Software Development</option>
+                            <option value={"IT"}>IT</option>
+                            <option value={"Finance"}>Finance</option>
+                            <option value={"Human Resources"}>Human Resources</option>
+                            <option value={"Sales"}>Sales</option>
+                        </select>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Position:</span>
+                        <input type={"text"} onChange={handlePositionChange} value={position} placeholder={"position"}
+                               required={true}/>
+                    </div>
                 </div>
-                <div>
-                    <label>Department:</label>
-                    <select name={"department"} value={department} required={true} onChange={handleDepartmentChange}>
-                        <option value="" disabled>Choose a department</option>
-                        <option value={"Engineering"}>Engineering</option>
-                        <option value={"Software Development"}>Software Development</option>
-                        <option value={"IT"}>IT</option>
-                        <option value={"Finance"}>Finance</option>
-                        <option value={"Human Resources"}>Human Resources</option>
-                        <option value={"Sales"}>Sales</option>
-                    </select>
+                <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Date of birth: </span>
+                        <input type={"date"} onChange={handleDateOfBirthChange} value={dateOfBirth}
+                               placeholder={"date of birth"} required={true}/>
+                    </div>
                 </div>
-                <div>
-                    <label>Position:</label>
-                    <input type={"text"} onChange={handlePositionChange} value={position} placeholder={"position"}
-                           required={true}/>
+                <div className={"gender-details"}>
+                    <div className={"category"}>
+                        <label htmlFor="gender">Gender:</label>
+                        {Array.from(genderOptions, ([value, label]) => (
+                            <div key={value}>
+                                <input className={"dot-1"}
+                                       type="radio"
+                                       id={value}
+                                       name="gender"
+                                       value={value}
+                                       onChange={handleGenderChange}
+                                       checked={gender === value}
+                                       required
+                                />
+                                <label htmlFor={label}>{label}</label>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                <div>
-                    <label>Date of birth: </label>
-                    <input type={"date"} onChange={handleDateOfBirthChange} value={dateOfBirth}
-                           placeholder={"date of birth"} required={true}/>
-                </div>
-                <div>
-                    <label htmlFor="gender">Gender:</label>
-                    {Array.from(genderOptions, ([value, label]) => (
-                        <div key={value}>
-                            <input
-                                type="radio"
-                                id={value}
-                                name="gender"
-                                value={value}
-                                onChange={handleGenderChange}
-                                checked={gender === value}
-                                required
-                            />
-                            <label htmlFor={value}>{label}</label>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <label>
-                        Address:
+                <span>Address:</span>
+                <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Street:</span>
                         <input type={"text"} onChange={handleAddress_StreetChange} value={address.street}
                                placeholder={"street"} required={true}/>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}>House nr:</span>
                         <input type={"text"} onChange={handleAddress_HouseNumberChange} value={address.houseNumber}
                                placeholder={"house number"} required={true}/>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Plz:</span>
                         <input type={"text"} onChange={handleAddress_PostalCodeChange} value={address.postalCode}
                                placeholder={"postal code"} required={true}/>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}>City:</span>
                         <input type={"text"} onChange={handleAddress_CityChange} value={address.city}
                                placeholder={"city"}
                                required={true}/>
-                    </label>
+                    </div>
+
                 </div>
-                <label>
-                    E-Mail:
-                    <input type={"email"} onChange={handleEmailChange} value={email} placeholder={"e-mail"}
-                           required={true}/>
-                </label>
-                <label>
-                    Phone number:
-                    <input type={"text"} onChange={handlePhoneNumberChange} value={phoneNumber}
-                           placeholder={"phone number"} required={true}/>
-                </label>
-                <label>
-                    Added:
-                    <input type={"datetime-local"} onChange={handleAddedChange}
-                           value={moment(added).format("YYYY-MM-DD HH:mm")} placeholder={"added"} required={true}/>
-                </label>
-                <label>
-                    <a href={props.employee.cv}>CV</a>
-                </label>
-                <label>
-                    Upload CV:
-                    <input type={'file'} onChange={handleFileChange} accept={"application/pdf"} required={false}/>
-                </label>
+                <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>E-Mail:</span>
+                        <input type={"email"} onChange={handleEmailChange} value={email} placeholder={"e-mail"}
+                               required={true}/>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Phone number: </span>
+                        <input type={"text"} onChange={handlePhoneNumberChange} value={phoneNumber}
+                               placeholder={"phone number"} required={true}/>
+                    </div>
+                </div>
+                <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Upload CV:</span>
+                        <input type={'file'} onChange={handleFileChange} accept={"application/pdf"} required={false}/>
+                    </div>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Entry date:</span>
+                        <input type={"datetime-local"} onChange={handleAddedChange}
+                               value={moment(added).format("YYYY-MM-DD HH:mm")} placeholder={"entry date"}
+                               required={true}/>
+                    </div>
+                </div>
                 <menu>
                     <li>
                         <button type={"submit"}>
@@ -257,5 +280,6 @@ export default function EmployeeForm(props: Props) {
                 </menu>
             </form>
         </>
-    );
+    )
+        ;
 }
