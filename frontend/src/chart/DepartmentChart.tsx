@@ -76,7 +76,7 @@ const DepartmentChart = (props: Props) => {
             title: {
                 display: true,
                 text: "Employees by Department",
-                font: {size: 10},
+                font: {size: 10}
             },
             legend: {
                display:false
@@ -96,7 +96,7 @@ const DepartmentChart = (props: Props) => {
                 align: "top",
                 offset: -3,
                 formatter: (value) => value,
-                font: { size: 9, weight: "bold"},
+                font: { size: 9, weight: "bold"}
             },
         },
         scales: {
@@ -121,14 +121,14 @@ const DepartmentChart = (props: Props) => {
                         size: 7,
                         weight: 'bold'
                     },
-                    align: 'center',
+                    align: 'center'
                 }
             },
             y: {
                 beginAtZero: true,
                 ticks: {
                     stepSize: 1,
-                    maxTicksLimit: 100,
+                    maxTicksLimit: 100
                 },
                 title: {
                     display: true,

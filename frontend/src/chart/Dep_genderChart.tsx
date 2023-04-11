@@ -60,21 +60,21 @@ const EmployeeBarChart: React.FC<Props> = ({employees}) => {
                 label: 'Male',
                 data: maleCounts,
                 backgroundColor: 'rgba(4,90,220,0.7)',
-                borderWidth: 0,
+                borderWidth: 0
             },
             {
                 barThickness: 30,
                 label: 'Female',
                 data: femaleCounts,
                 backgroundColor: 'rgba(200,66,120,0.7)',
-                borderWidth: 0,
+                borderWidth: 0
             },
             {
                 barThickness: 30,
                 label: 'Other',
                 data: otherCounts,
                 backgroundColor: 'rgba(20,124,120,0.7)',
-                borderWidth: 0,
+                borderWidth: 0
             },
         ],
     };
@@ -94,13 +94,13 @@ const EmployeeBarChart: React.FC<Props> = ({employees}) => {
                     font: {
                         size: 12
                     },
-                    borderRadius: 5,
+                    borderRadius: 5
                 }
             },
             title: {
                 display: true,
                 text: "Employees by department and gender",
-                font: {size: 10},
+                font: {size: 10}
             },
             datalabels: {
                 display: true,
@@ -112,7 +112,7 @@ const EmployeeBarChart: React.FC<Props> = ({employees}) => {
                     size: 9,
                     weight: 'bold',
                 },
-                formatter: (value: number) => (value === 0 ? '' : value.toString()),
+                formatter: (value: number) => (value === 0 ? '' : value.toString())
             },
         },
         scales: {
@@ -138,7 +138,7 @@ const EmployeeBarChart: React.FC<Props> = ({employees}) => {
                         size: 7,
                         weight: 'bold'
                     },
-                    align: 'center',
+                    align: 'center'
                 }
             },
             y: {
@@ -146,7 +146,7 @@ const EmployeeBarChart: React.FC<Props> = ({employees}) => {
                 stacked: true,
                 ticks: {
                     stepSize: 1,
-                    maxTicksLimit: 100,
+                    maxTicksLimit: 100
                 },
                 title: {
                     display: true,

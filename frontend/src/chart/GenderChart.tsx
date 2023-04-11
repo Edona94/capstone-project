@@ -67,7 +67,7 @@ const GenderChart = (props: Props) => {
                 align: "start",
                 offset:-2,
                 formatter: (value) => value +'%',
-                font: { size: 8, weight: "bold"},
+                font: { size: 8, weight: "bold"}
             },
             title: {
                 display: true,
@@ -84,7 +84,7 @@ const GenderChart = (props: Props) => {
                     font: {
                         size: 12
                     },
-                    borderRadius: 5,
+                    borderRadius: 5
                 }
             },
         },
@@ -98,7 +98,7 @@ const GenderChart = (props: Props) => {
         },
         elements: {
             arc: {
-                borderWidth: 1,
+                borderWidth: 1
             }
         },
         cutout: '65%'

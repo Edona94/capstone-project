@@ -68,7 +68,7 @@ femaleCounts.sort((a, b) =>
                         "rgba(153, 102, 255, 0.8)",
                         "rgba(255, 159, 78, 0.8)",
                     ],
-                    borderWidth: 1,
+                    borderWidth: 1
                 },
             ],
         });
@@ -82,7 +82,7 @@ femaleCounts.sort((a, b) =>
                 display: true,
                 text: "Women percentage by role",
                 font: {size: 10},
-                padding:{bottom:15,top:12},
+                padding:{bottom:15,top:12}
             },
             legend: {
                 display:false
@@ -102,7 +102,7 @@ femaleCounts.sort((a, b) =>
                 align: "top",
                 offset: -3,
                 formatter: (value) => value+ '%',
-                font: { size: 9, weight: "bold"},
+                font: { size: 9, weight: "bold"}
             },
         },
         scales: {
@@ -127,7 +127,7 @@ femaleCounts.sort((a, b) =>
                         size: 7,
                         weight: 'bold'
                     },
-                    align: 'center',
+                    align: 'center'
                 }
             },
             y: {
