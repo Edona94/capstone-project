@@ -20,6 +20,10 @@
 .sign-in-div a{
     text-decoration: none;
     color: blueviolet;
+    font-size: 14px;
+}
+.sign-in-div p{
+    font-size: 14px;
 }
 
 .signup-form :focus-visible {
@@ -40,7 +44,7 @@
 }
 
 .signup-form button:hover {
-    background-color:blueviolet;
+    background-color:rgba(79,88,173,0.95);
 }
 
 .signup-form  {

@@ -11,8 +11,8 @@ export default function SignInPage() {
                 <h2 className={"sign-in-h2"}>Sign In</h2>
                 <SignForm action={"sign-in"}/>
                 <div className={"sign-in-div"}>
-                    Don't have an account yet?<br/>
-                    <p>Sign up <Link to={"/sign-up"}>here</Link></p>
+                   <p> Don't have an account?
+                  <span> <Link to={"/sign-up"}>Sign up</Link></span></p>
                 </div>
             </div>
         </Layout>
