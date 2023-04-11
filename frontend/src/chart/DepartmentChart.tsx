@@ -26,6 +26,7 @@ const DepartmentChart = (props: Props) => {
         labels: string[];
         datasets: {
             label: string;
+            barThickness: number,
             data: number[];
             backgroundColor: string[];
             borderWidth: number;
@@ -52,6 +53,7 @@ const DepartmentChart = (props: Props) => {
             datasets: [
                 {
                     label: "Employees by Department",
+                    barThickness: 30,
                     data: counts,
                     backgroundColor: [
                         "rgba(24,100,250,0.8)",
@@ -74,7 +76,7 @@ const DepartmentChart = (props: Props) => {
             title: {
                 display: true,
                 text: "Employees by Department",
-                font: {size: 10}
+                font: {size: 10},
             },
             legend: {
                display:false
@@ -104,6 +106,12 @@ const DepartmentChart = (props: Props) => {
                 ticks: {
                     stepSize: 1,
                     maxTicksLimit: 100,
+                    font: {
+                        size: 10
+                    }
+                },
+                grid : {
+                    display : false
                 },
                 title: {
                     display: true,
@@ -138,7 +146,7 @@ const DepartmentChart = (props: Props) => {
     };
 
     return (
-        <div className="chart-container1" style={{ height: "200px",width:"370px" }}>
+        <div className="chart-container1" >
             {chartData && <Bar data={chartData} options={options}/>}
         </div>
     );

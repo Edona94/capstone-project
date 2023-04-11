@@ -63,9 +63,9 @@ const GenderChart = (props: Props) => {
             },
             datalabels: {
                 display: true,
-                anchor: "end",
+                anchor: "start",
                 align: "start",
-                offset:16,
+                offset:-2,
                 formatter: (value) => value +'%',
                 font: { size: 8, weight: "bold"},
             },
@@ -104,7 +104,7 @@ const GenderChart = (props: Props) => {
         cutout: '65%'
     };
     return (
-        <div className="chart-container" style={{ height: "200px" ,width:"215px"}}>
+        <div className="chart-container" >
             {chartData && <Doughnut data={chartData} options={options}/>}
         </div>
     );
