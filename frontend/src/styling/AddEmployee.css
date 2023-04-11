@@ -1,15 +1,33 @@
 .add-employee{
-    width:90%;
-    display:grid;
+    width:60%;
+    display:flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items:normal;
     border-radius: 5px;
-    background-color: rgba(198,198,198,0.1);
+    background-color: white;
     box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.2);
     margin: auto auto 20px;
-    padding: 30px;
+    padding: 5px 50px 20px;
 }
-.add-employee :focus-visible {
-    outline: 1px solid lightgrey;
+@media screen and (max-width: 430px){
+    .add-employee {
+        width: 90%;
+        display: flex;
+        flex-flow: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: normal;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.2);
+        margin: auto auto 20px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 }
+
 .add-employee input{
     width:auto;
     padding: 12px 20px;
@@ -21,19 +39,30 @@
 }
 
 .add-employee button {
-    background-color: #4F58AD;
+    background-color: rgba(79,88,173,0.95);
     color: white;
-    padding: 8px 12px;
     margin: 8px 0;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     float: right;
+    padding: 7px 8px;
 }
 
 .add-employee button:hover {
-    background-color: blueviolet;
+   background-color: rgba(79,88,173,0.9);
+}
+
+.add-employee menu button.cancel {
+    background-color: white;
+    color: #4F58AD;
+    border: 2px solid rgba(79,88,173,0.8);
+    padding: 5px 8px;
+}
+.add-employee menu button.cancel:hover {
+    background-color:rgba(79,88,173,0.9);
+    color:white;
 }
 
 .add-employee label {
@@ -53,9 +82,70 @@
     margin-bottom: 0;
     gap: 1em;
 }
-.add-employee menu button.cancel {
-    background-color: brown;
+
+ .user-details {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 5px 0 0 0;
 }
-.add-employee menu button.cancel:hover {
-    background-color: #ba052b;
+.user-details .input-box {
+    margin: 10px 0 0 0;
+    width: calc(100% / 2 - 20px);
+}
+.user-details .input-box .details{
+    display: block;
+    font-weight: 400;
+    font-size: 15px;
+}
+@media screen and (max-width: 430px){
+    .user-details {
+       max-height: 300px;
+        overflow-y: scroll;
+    }
+    .user-details .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    .gender-details .category{
+        width:100%
+    }
+    .user-details::-webkit-scrollbar{
+        width: 0;
+    }
+}
+
+.user-details .input-box input{
+    height: 40px;
+    width: 80%;
+    outline: none;
+    border-radius:5px;
+    border-bottom: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+    border-color:rgba(198,198,198,0.9)}
+
+.gender-details .category{
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.gender-details .category .dot-1{
+    height: 18px;
+    width: 18px;
+    background: #d9d9d9;
+    border-radius: 70%;
+    margin-right: 10px;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+.dot-1:checked:before{
+    border-color: #d9d9d9;
+    background-color: #9b59b6;
 }
