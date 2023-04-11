@@ -1,14 +1,11 @@
 import {Employee} from "../model/Employee";
-import EmployeeCard from "./EmployeeCard";
 import "../styling/EmployeeGallery.css";
 import {ChangeEvent, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Layout from "./Layout";
 import useAuth from "../hooks/useAuth";
 import '../styling/Pagination.css'
-import GenderChart from "../chart/GenderChart";
-import DepartmentChart from "../chart/DepartmentChart";
-
+import moment from "moment";
 
 type Props = {
     employees: Employee[]
@@ -21,7 +18,7 @@ export default function EmployeeGallery(props: Props) {
     const [sortedByFirstName, setSortedByFirstName] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [employeesPerPage] = useState(5);
+    const [employeesPerPage] = useState(10);
 
     const navigate = useNavigate();
     function handleClick() {
@@ -61,9 +58,6 @@ export default function EmployeeGallery(props: Props) {
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const employeeCards = currentEmployees.map((employee) => {
-        return <EmployeeCard key={employee.id} employee={employee} />;
-    });
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(sortedList.length / employeesPerPage); i++) {
@@ -79,27 +73,51 @@ export default function EmployeeGallery(props: Props) {
 
     return !user ? null: (
         <Layout>
-            <div className={"chart"}>
-                <GenderChart employees={props.employees}/>
-            </div>
-            <div className={"department-chart"}>
-                <DepartmentChart employees={props.employees}/>
-            </div>
             <section className={"employee-gallery"}>
                 <div>
-                    <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
+                    {isAdmin && (
+                        <button className={"button-add"} onClick={handleClick}>Add a new Employee</button>
+                    )}
                 </div>
                 <div>
-                    {isAdmin && (
-                        <button onClick={handleClick}>Add a new Employee</button>
-                    )}
-                    <button onClick={() => setSortedByFirstName(!sortedByFirstName)}>Sort by First Name</button>
                     <p>Number of Employees: {props.employees.length}</p>
+                    <input type={"text"} onChange={handleFilterChange} placeholder={"Search"}/>
+                    <button onClick={() => setSortedByFirstName(!sortedByFirstName)}>Sort</button>
                 </div>
-                {employeeCards.length > 0 ? (
-                    <>
-                        {employeeCards}
-                        <div className="pagination">
+                {currentEmployees.length > 0 ? (
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Department</th>
+                            <th className={"position"}>Position</th>
+                            <th className={"added"}>Entry date</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {currentEmployees.map((employee) => (
+                            <tr key={employee.id}>
+                                <td>{employee.firstName}</td>
+                                <td>{employee.lastName}</td>
+                                <td>{employee.department}</td>
+                                <td className={"position"}>{employee.position}</td>
+                                <td className={"td-added"}>{moment(employee.added).format("DD-MM-YYYY")}</td>
+                                <td className={"link"}>
+                                    <Link to={"/employee/"+ employee.id}
+                                       >
+                                        Details
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    "No employees yet"
+                )}
+                <div className="pagination">
                             <Link to="#" onClick={prevPage}>&laquo;</Link>
                             {pageNumbers.map((number) => (
                                 <Link key={number} to="#" onClick={() => paginate(number)}
@@ -110,10 +128,6 @@ export default function EmployeeGallery(props: Props) {
                             ))}
                             <Link to='#' onClick={nextPage}>&raquo;</Link>
                         </div>
-                    </>
-                ) : (
-                    "No employees yet"
-                )}
             </section>
         </Layout>
     )
