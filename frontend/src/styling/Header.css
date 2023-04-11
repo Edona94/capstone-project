@@ -17,9 +17,11 @@
     align-items: center;
     white-space: nowrap;
 }
+
 .navigation-block h2{
     padding-left: 7px;
 }
+
 .navigation-block span {
     color: rgba(79,88,173,0.95);
 }
@@ -27,7 +29,6 @@
 .navigation-block:first-of-type {
     white-space: initial;
 }
-
 
 .nav a {
     text-decoration: none;
