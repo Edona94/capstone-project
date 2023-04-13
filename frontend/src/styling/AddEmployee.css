@@ -146,7 +146,7 @@
 }
 .gender-details .category{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .gender-details .category .dot-1{
