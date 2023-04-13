@@ -265,6 +265,8 @@ class EmployeeControllerTest {
     @DirtiesContext
     @WithMockUser
     void deleteEmployee_whenIdExist_thenReturnThatEmployee() throws Exception {
+        when(cloudinary.uploader()).thenReturn(uploader);
+        when(uploader.destroy(any(), anyMap())).thenReturn(Map.of("result", "ok"));
         mongoUserRepository.save(mongoUser);
         employeeRepository.save(employee1);
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/employees/1")
