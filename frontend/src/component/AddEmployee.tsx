@@ -22,7 +22,7 @@ export default function AddEmployee(props: Props) {
                     firstName: "", lastName: "", position: "", dateOfBirth: "",
                     address: {street: "", houseNumber: "", postalCode: "", city: ""},
                     email: "", phoneNumber: "", added: new Date(),gender: Gender.FEMALE || Gender.MALE || Gender.OTHER,
-                    department:""
+                    department:"",salary:""
                 }}
                               onSubmit={props.onAdd}
                               action={"add"}

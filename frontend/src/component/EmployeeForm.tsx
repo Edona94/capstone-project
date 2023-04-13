@@ -31,6 +31,7 @@ export default function EmployeeForm(props: Props) {
     const [file, setFile] = React.useState<File | undefined>(undefined);
     const [gender, setGender] = useState(props.employee.gender)
     const [department, setDepartment] = useState(props.employee.department)
+    const [salary, setSalary] = useState<string>(props.employee.salary)
 
     const navigate = useNavigate()
 
@@ -113,7 +114,9 @@ export default function EmployeeForm(props: Props) {
     function handleDepartmentChange(event: ChangeEvent<HTMLSelectElement>) {
         setDepartment(event.target.value)
     }
-
+    function handleSalaryChange(event: ChangeEvent<HTMLInputElement>) {
+        setSalary(event.target.value);
+    }
 
     function formSubmitHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -129,7 +132,8 @@ export default function EmployeeForm(props: Props) {
             phoneNumber,
             added,
             gender,
-            department
+            department,
+            salary
         }
         if (props.employee.id) {
             editEmployee.id = props.employee.id
@@ -175,7 +179,7 @@ export default function EmployeeForm(props: Props) {
                 <div className={"user-details"}>
                     <div className={"input-box"}>
                         <span className={"details"}>Department:</span>
-                        <select name={"department"} value={department} required={true}
+                        <select  className={"select-option"} name={"department"} value={department} required={true}
                                 onChange={handleDepartmentChange}>
                             <option value="" disabled>Choose a department</option>
                             <option value={"Engineering"}>Engineering</option>
@@ -193,6 +197,11 @@ export default function EmployeeForm(props: Props) {
                     </div>
                 </div>
                 <div className={"user-details"}>
+                    <div className={"input-box"}>
+                        <span className={"details"}>Salary:</span>
+                        <input type={"text"}  onChange={handleSalaryChange} value={salary} placeholder={"salary"}
+                               required={true}/>
+                    </div>
                     <div className={"input-box"}>
                         <span className={"details"}>Date of birth: </span>
                         <input type={"date"} onChange={handleDateOfBirthChange} value={dateOfBirth}
@@ -220,22 +229,22 @@ export default function EmployeeForm(props: Props) {
                 </div>
                 <span>Address:</span>
                 <div className={"user-details"}>
-                    <div className={"input-box"}>
+                    <div className={"input-box-address"}>
                         <span className={"details"}>Street:</span>
                         <input type={"text"} onChange={handleAddress_StreetChange} value={address.street}
                                placeholder={"street"} required={true}/>
                     </div>
-                    <div className={"input-box"}>
+                    <div className={"input-box-address"}>
                         <span className={"details"}>House nr:</span>
                         <input type={"text"} onChange={handleAddress_HouseNumberChange} value={address.houseNumber}
                                placeholder={"house number"} required={true}/>
                     </div>
-                    <div className={"input-box"}>
+                    <div className={"input-box-address"}>
                         <span className={"details"}>Plz:</span>
                         <input type={"text"} onChange={handleAddress_PostalCodeChange} value={address.postalCode}
                                placeholder={"postal code"} required={true}/>
                     </div>
-                    <div className={"input-box"}>
+                    <div className={"input-box-address"}>
                         <span className={"details"}>City:</span>
                         <input type={"text"} onChange={handleAddress_CityChange} value={address.city}
                                placeholder={"city"}
