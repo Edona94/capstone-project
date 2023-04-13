@@ -41,7 +41,7 @@ const DepartmentChart = (props: Props) => {
             const femaleEmployees = employeesInDepartment.filter(employee => employee.gender === Gender.FEMALE);
             const femaleCount = femaleEmployees.length;
             const totalCount = employeesInDepartment.length;
-            const percentage = Math.round((femaleCount / totalCount) * 100);
+            const percentage = ((femaleCount / totalCount) * 100).toFixed(2);
             return {
                 department,
                 percentage
@@ -52,7 +52,7 @@ const DepartmentChart = (props: Props) => {
 femaleCounts.sort((a, b) =>
     a.department.localeCompare(b.department));
         const labels = femaleCounts.map(d => d.department);
-        const counts = femaleCounts.map(d => d.percentage);
+        const counts = femaleCounts.map(d => parseFloat(d.percentage));
         setChartData({
             labels,
             datasets: [
