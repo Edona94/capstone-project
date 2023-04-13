@@ -1,5 +1,6 @@
 package com.github.edona94.service;
 
+import com.github.edona94.exception.CVDeletionFailedException;
 import com.github.edona94.exception.EmployeeNotFoundException;
 import com.github.edona94.model.*;
 import com.github.edona94.repository.EmployeeRepository;
@@ -192,5 +193,15 @@ class EmployeeServiceTest {
         verify(employeeRepository).findById(employee1.id());
         verify(mongoUserDetailsService).getMe(principal);
         assertEquals(expected, actual);
+    }
+    @Test
+    void deleteEmployee_whenCloudinaryThrowsException_thenThrowException() throws IOException {
+        // GIVEN
+        when(mongoUserDetailsService.getMe(principal)).thenReturn(new MongoUserResponse("a","",""));
+        when(employeeRepository.findById(employee1.id())).thenReturn(Optional.of(employee1));
+        when(cvService.deleteCV(employee1.cv())).thenThrow(IOException.class);
+        String id = employee1.id();
+        // WHEN & THEN
+        assertThrows(CVDeletionFailedException.class, () -> employeeService.deleteEmployee(id, principal));
     }
 }
