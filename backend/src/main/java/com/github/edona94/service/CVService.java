@@ -20,11 +20,11 @@ public class CVService {
         return result.get("url").toString();
     }
 
-    public void deleteCV(String url) throws IOException {
+    public String deleteCV(String url) throws IOException {
         int startOfPublicId = url.lastIndexOf('/') + 1;
         int endOfPublicId = url.indexOf('.', startOfPublicId);
         String publicId = url.substring(startOfPublicId, endOfPublicId);
         Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
-        result.get("result").toString();
+        return result.get("result").toString();
     }
 }
