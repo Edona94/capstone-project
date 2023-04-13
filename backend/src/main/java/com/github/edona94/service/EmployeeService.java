@@ -115,7 +115,7 @@ public class EmployeeService {
             try {
                 cvService.deleteCV(employee.get().cv());
             } catch (IOException e) {
-                throw new CVDeletionFailedException("The CV deletion didn't work");
+                throw new CVDeletionFailedException("The CV deletion didn't work"+ e.getMessage());
             }
         }
 
