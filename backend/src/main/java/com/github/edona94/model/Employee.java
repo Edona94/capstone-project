@@ -3,6 +3,7 @@ package com.github.edona94.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
@@ -21,6 +22,7 @@ public record Employee(
         String cv,
         Gender gender,
         String department,
+        BigDecimal salary,
         String userId
 ) {
 }
