@@ -1,5 +1,6 @@
 package com.github.edona94.service;
 
+import com.github.edona94.exception.CVDeletionFailedException;
 import com.github.edona94.exception.EmployeeNotFoundException;
 import com.github.edona94.exception.UnauthorizedException;
 import com.github.edona94.model.Employee;
@@ -58,6 +59,7 @@ public class EmployeeService {
                 cvUri,
                 employeeDTORequest.gender(),
                 employeeDTORequest.department(),
+                employeeDTORequest.salary(),
                 adminId
         );
         return employeeRepository.save(newEmployee);
@@ -91,6 +93,7 @@ public class EmployeeService {
                 cvUri,
                 employeeDTORequest.gender(),
                 employeeDTORequest.department(),
+                employeeDTORequest.salary(),
                 adminId
         );
         return employeeRepository.save(updatedEmployee);
@@ -99,12 +102,23 @@ public class EmployeeService {
     public Employee deleteEmployee(String id,Principal principal) {
         String adminId = mongoUserDetailsService.getMe(principal).id();
         Optional<Employee> employee = employeeRepository.findById(id);
+
         if(employee.isEmpty()) {
             throw new EmployeeNotFoundException("Employee with id" +id+ "doesn't exist");
         }
+
         if(!employee.get().userId().equals(adminId)){
             throw new UnauthorizedException("Only Admin can delete an employee");
         }
+
+        if (employee.get().cv() != null && !employee.get().cv().isBlank()) {
+            try {
+                cvService.deleteCV(employee.get().cv());
+            } catch (IOException e) {
+                throw new CVDeletionFailedException("The CV deletion didn't work"+ e.getMessage());
+            }
+        }
+
         employeeRepository.deleteById(id);
         return employee.get();
     }

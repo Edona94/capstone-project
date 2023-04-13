@@ -32,15 +32,15 @@ const GenderChart = (props: Props) => {
             (employee) => employee.gender === "OTHER"
         ).length;
 
-        const percentageMale = Math.round((totalMale / totalEmployees) * 100);
-        const percentageFemale = Math.round((totalFemale / totalEmployees) * 100);
-        const percentageOther = Math.round((totalOther / totalEmployees) * 100);
+        const percentageMale = ((totalMale / totalEmployees) * 100).toFixed(2);
+        const percentageFemale = ((totalFemale / totalEmployees) * 100).toFixed(2);
+        const percentageOther = ((totalOther / totalEmployees) * 100).toFixed(2);
 
         setChartData({
             labels: ["Male", "Female", "Other"],
             datasets: [
                 {
-                    data: [percentageMale, percentageFemale,percentageOther],
+                    data: [parseFloat(percentageMale), parseFloat(percentageFemale),parseFloat(percentageOther)],
                     backgroundColor: ["rgba(4,90,220,0.7)", "rgba(200,66,120,0.7)", "rgba(20,124,120,0.7)"],
                 },
             ],

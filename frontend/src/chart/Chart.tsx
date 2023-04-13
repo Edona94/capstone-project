@@ -5,6 +5,7 @@ import DepartmentChart from "./DepartmentChart";
 import {Employee} from "../model/Employee";
 import useAuth from "../hooks/useAuth";
 import EmployeeBarChart from "./Dep_genderChart";
+import SalaryChart from "./SalaryChart";
 
 type Props = {
     employees: Employee[]
@@ -16,6 +17,9 @@ return !user ? null: (
     <Layout>
         <div className={"chart"}>
             <GenderChart employees={props.employees}/>
+        </div>
+        <div className={"chart"}>
+            <SalaryChart employees={props.employees}/>
         </div>
         <div className={"department-chart"}>
             <WomenChart employees={props.employees}/>

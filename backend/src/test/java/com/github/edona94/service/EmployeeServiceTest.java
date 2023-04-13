@@ -1,5 +1,6 @@
 package com.github.edona94.service;
 
+import com.github.edona94.exception.CVDeletionFailedException;
 import com.github.edona94.exception.EmployeeNotFoundException;
 import com.github.edona94.model.*;
 import com.github.edona94.repository.EmployeeRepository;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -54,6 +56,7 @@ class EmployeeServiceTest {
                 "employee1.pdf",
                 Gender.FEMALE,
                 "Software Development",
+                new BigDecimal("49800.50"),
                 "a"
         );
 
@@ -86,7 +89,8 @@ class EmployeeServiceTest {
                 employee1.phoneNumber(),
                 employee1.added(),
                 employee1.gender(),
-                employee1.department()
+                employee1.department(),
+                employee1.salary()
         );
         when(employeeRepository.save(employee1)).thenReturn(employee1);
         when(mongoUserDetailsService.getMe(principal)).thenReturn(new MongoUserResponse("a","",""));
@@ -134,7 +138,8 @@ class EmployeeServiceTest {
                 "00157-123-456-22",
                 employee1.added(),
                 employee1.gender(),
-                employee1.department());
+                employee1.department(),
+                employee1.salary());
         Employee updatedEmployee = new Employee(
                 employee1.id(),
                 employeeDTORequest.firstName(),
@@ -148,6 +153,7 @@ class EmployeeServiceTest {
                 employee1.cv(),
                 employeeDTORequest.gender(),
                 employeeDTORequest.department(),
+                employeeDTORequest.salary(),
                 "a");
 
         when(cvService.uploadCV(multipartFile)).thenReturn(employee1.cv());
@@ -187,5 +193,15 @@ class EmployeeServiceTest {
         verify(employeeRepository).findById(employee1.id());
         verify(mongoUserDetailsService).getMe(principal);
         assertEquals(expected, actual);
+    }
+    @Test
+    void deleteEmployee_whenCloudinaryThrowsException_thenThrowException() throws IOException {
+        // GIVEN
+        when(mongoUserDetailsService.getMe(principal)).thenReturn(new MongoUserResponse("a","",""));
+        when(employeeRepository.findById(employee1.id())).thenReturn(Optional.of(employee1));
+        when(cvService.deleteCV(employee1.cv())).thenThrow(IOException.class);
+        String id = employee1.id();
+        // WHEN & THEN
+        assertThrows(CVDeletionFailedException.class, () -> employeeService.deleteEmployee(id, principal));
     }
 }
