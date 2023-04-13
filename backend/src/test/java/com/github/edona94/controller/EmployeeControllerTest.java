@@ -21,6 +21,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Map;
@@ -66,6 +67,7 @@ class EmployeeControllerTest {
                 "employee1.pdf",
                 Gender.FEMALE,
                 "Software Development",
+                new BigDecimal("49800.50"),
                 "1a"
         );
         mongoUser = new MongoUser("1a","user","password","BASIC");
