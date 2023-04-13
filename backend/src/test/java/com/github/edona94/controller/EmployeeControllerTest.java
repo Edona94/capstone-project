@@ -54,6 +54,7 @@ class EmployeeControllerTest {
         LocalDate dateOfBirth1 = LocalDate.of(1991, 1, 1);
         Address address1 = new Address("street1", "1", "80000", "Munich");
         Instant added1 = Instant.parse("2023-03-02T15:30:00Z");
+        BigDecimal salary =  new BigDecimal("49800.50");
         employee1 = new Employee(
                 "1",
                 "Employee 1",
@@ -67,7 +68,7 @@ class EmployeeControllerTest {
                 "employee1.pdf",
                 Gender.FEMALE,
                 "Software Development",
-                new BigDecimal("49800.50"),
+                salary,
                 "1a"
         );
         mongoUser = new MongoUser("1a","user","password","BASIC");
@@ -106,7 +107,8 @@ class EmployeeControllerTest {
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
                               "gender": "FEMALE",
-                              "department": "Software Development"
+                              "department": "Software Development",
+                              "salary": 49800.50
                            }
                         ]
                         """));
@@ -139,6 +141,7 @@ class EmployeeControllerTest {
                                       "added": "2023-03-02T15:30:00Z",
                                       "gender": "FEMALE",
                                       "department": "Software Development",
+                                      "salary": 49800.50,
                                       "userId": "1a"
                                    }
                                    """.getBytes()))
@@ -163,6 +166,7 @@ class EmployeeControllerTest {
                               "cv": "employee1.pdf",
                               "gender": "FEMALE",
                               "department": "Software Development",
+                              "salary": 49800.50,
                               "userId": "1a"
                            }
                         """))
@@ -193,7 +197,8 @@ class EmployeeControllerTest {
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
                               "gender": "FEMALE",
-                              "department": "Software Development"
+                              "department": "Software Development",
+                              "salary": 49800.50
                            }
                         """));
     }
@@ -224,7 +229,8 @@ class EmployeeControllerTest {
                                       "phoneNumber": "00157-123-456-78",
                                       "added": "2023-03-02T15:30:00Z",
                                       "gender": "FEMALE",
-                                      "department": "Software Development"
+                                      "department": "Software Development",
+                                      "salary": 49800.50
                                    }
                                    """.getBytes()))
                 .file(new MockMultipartFile("file", "content".getBytes()))
@@ -248,7 +254,8 @@ class EmployeeControllerTest {
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
                               "gender": "FEMALE",
-                              "department": "Software Development"
+                              "department": "Software Development",
+                              "salary": 49800.50
                            }
                         """))
                 .andExpect(jsonPath("$.id").isNotEmpty());
@@ -281,7 +288,8 @@ class EmployeeControllerTest {
                               "added": "2023-03-02T15:30:00Z",
                               "cv": "employee1.pdf",
                               "gender": "FEMALE",
-                              "department": "Software Development"
+                              "department": "Software Development",
+                              "salary": 49800.50
                            }
                         """));
     }
