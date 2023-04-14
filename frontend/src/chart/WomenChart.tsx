@@ -92,7 +92,7 @@ femaleCounts.sort((a, b) =>
                     label: function (context: any) {
                         const label = context.dataset.label || '';
                         const value = context.formattedValue;
-                        return `${label}: ${value}`;
+                        return `${label}: ${value}%`;
                     }
                 }
             },
