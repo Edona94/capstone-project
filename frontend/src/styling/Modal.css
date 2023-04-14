@@ -1,0 +1,51 @@
+.ReactModal__Content {
+    background-color: #fff;
+    border-radius: 4px;
+    max-width: 400px;
+    max-height: 180px ;
+    padding: 20px;
+    position: relative;
+    margin: auto;
+    z-index: 1001
+}
+
+.ReactModal__Content--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Content--before-close {
+    opacity: 0;
+}
+
+.ReactModal__Content h2 {
+    font-size: 23px;
+    margin-top: 0;
+    color: #4F58AD;
+}
+
+.ReactModal__Content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.ReactModal__Content span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ReactModal__Content button {
+    font-size: 14px;
+    padding: 8px 13px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color:rgba(79,88,173,0.9);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    float: right;
+}
+
+.ReactModal__Content button.yes {
+    background-color: #dc3545;
+}
