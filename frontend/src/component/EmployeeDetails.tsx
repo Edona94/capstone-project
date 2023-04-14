@@ -85,6 +85,14 @@ export default function EmployeeDetails(props: Props) {
                     <div className="employee-details__label">Position:</div>
                     <div className="employee-details__value">{employee.position}</div>
                 </div>
+                {isAdmin ?
+                <div className="employee-details__section">
+                    <div className="employee-details__label">Salary:</div>
+                    <div className="employee-details__value">{employee.salary}€</div>
+                </div>
+                    :
+                    null
+                }
                 <div className="employee-details__section">
                     <div className="employee-details__label">Date of birth:</div>
                     <div className="employee-details__value">{employee.dateOfBirth}</div>
