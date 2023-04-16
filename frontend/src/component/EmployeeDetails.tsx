@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import useAuth from "../hooks/useAuth";
 import Modal from "react-modal";
 import '../styling/Modal.css'
+import {toast} from "react-hot-toast";
 
 
 type Props = {
@@ -49,8 +50,14 @@ export default function EmployeeDetails(props: Props) {
         setShowModal(false);
         props
             .deleteEmployee(id || "undefined")
-            .then(() => navigate("/"))
-            .catch(console.error);
+            .then(() => {
+                navigate("/");
+             toast.success('Successfully deleted');
+    })
+            .catch(err => {
+                console.error(err);
+                toast.error('Error: ' + (err.response.data.error || err.response.data.message));
+            });
     }
 
     function cancelDelete() {
