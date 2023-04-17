@@ -227,7 +227,6 @@ export default function EmployeeForm(props: Props) {
                         ))}
                     </div>
                 </div>
-                <span>Address:</span>
                 <div className={"user-details"}>
                     <div className={"input-box-address"}>
                         <span className={"details"}>Street:</span>
@@ -235,12 +234,12 @@ export default function EmployeeForm(props: Props) {
                                placeholder={"street"} required={true}/>
                     </div>
                     <div className={"input-box-address"}>
-                        <span className={"details"}>House nr:</span>
+                        <span className={"details"}>House number:</span>
                         <input type={"text"} onChange={handleAddress_HouseNumberChange} value={address.houseNumber}
                                placeholder={"house number"} required={true}/>
                     </div>
                     <div className={"input-box-address"}>
-                        <span className={"details"}>Plz:</span>
+                        <span className={"details"}>Postal code:</span>
                         <input type={"text"} onChange={handleAddress_PostalCodeChange} value={address.postalCode}
                                placeholder={"postal code"} required={true}/>
                     </div>
