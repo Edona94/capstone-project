@@ -210,5 +210,15 @@
     width: 80%;
     height: 40px;
     cursor: pointer;
-    border-color:rgba(198,198,198,0.9)
+    outline: none;
+    border-radius:5px;
+    border-bottom: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    border-color:rgba(198,198,198,0.9);
+    background-color: white;
+}
+
+.select-option:focus {
+    border-color: mediumpurple;
 }
