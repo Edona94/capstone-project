@@ -76,7 +76,7 @@ export default function EmployeeGallery(props: Props) {
             <section className={"employee-gallery"}>
                 <div>
                     {isAdmin && (
-                        <button className={"button-add"} onClick={handleClick}>Add a new Employee</button>
+                        <button className={"button-add"} onClick={handleClick}>Add a new employee</button>
                     )}
                 </div>
                 <div>

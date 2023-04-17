@@ -37,7 +37,7 @@ export default function EditEmployee(props: Props) {
     }
     return !isAdmin ? null : (
         <Layout>
-            <h2 className={"add-employee-h2"}>Edit Employee data</h2>
+            <h2 className={"add-employee-h2"}>Edit employee data</h2>
             <EmployeeForm employee={employee}
                           onSubmit={props.onEdit}
                           action={"update"}
