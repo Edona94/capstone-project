@@ -88,7 +88,9 @@ export default function EmployeeForm(props: Props) {
     }
 
     function handlePhoneNumberChange(event: ChangeEvent<HTMLInputElement>) {
-        setPhoneNumber(event.target.value)
+        const inputPhoneNumber = event.target.value;
+        const numericPhoneNumber = inputPhoneNumber.replace(/\D/g, "");
+        setPhoneNumber(numericPhoneNumber);
     }
 
     function handleAddedChange(event: ChangeEvent<HTMLInputElement>) {
@@ -259,7 +261,7 @@ export default function EmployeeForm(props: Props) {
                     </div>
                     <div className={"input-box"}>
                         <span className={"details"}>Phone number: </span>
-                        <input type={"text"} onChange={handlePhoneNumberChange} value={phoneNumber}
+                        <input type={"tel"} onChange={handlePhoneNumberChange} value={phoneNumber}
                                placeholder={"phone number"} required={true}/>
                     </div>
                 </div>
