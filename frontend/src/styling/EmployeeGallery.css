@@ -8,7 +8,7 @@
     margin-right: 50px;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 900px) {
     .employee-gallery {
         display: flex;
         flex-flow: column nowrap;
@@ -18,7 +18,7 @@
     }
 }
 
-@media screen and (min-width: 430px) {
+@media screen and (min-width: 900px) {
     .employee-gallery .button-add {
         margin-left: 150px;
         margin-top: 25px;
@@ -33,7 +33,7 @@
     }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 900px) {
     .employee-gallery .button-add {
         margin-top: 2px;
         background-color: white;
@@ -61,7 +61,7 @@
     }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 900px) {
     .employee-gallery button {
         background-color: white;
         color: rgba(79,88,173,0.95);
@@ -89,7 +89,7 @@
    color:darkgoldenrod;
 }
 
-@media screen and (min-width: 430px) {
+@media screen and (min-width: 900px) {
     .employee-gallery p {
         margin-left: 150px;
     }
@@ -105,7 +105,7 @@
     float: right;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 900px) {
     .employee-gallery input[type=text] {
         width: 150px;
         padding: 5px 8px;
@@ -121,7 +121,7 @@
     outline: #4F58AD auto 1px;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 900px) {
     table {
         font-family: Arial, sans-serif;
         border-collapse: collapse;
@@ -129,7 +129,7 @@
     }
 }
 
-@media screen and (min-width: 430px) {
+@media screen and (min-width: 900px) {
     table {
         font-family: Arial, sans-serif;
         border-collapse: collapse;
@@ -143,11 +143,18 @@ td, th {
     padding:10px;
 }
 
+@media screen and (max-width: 430px) {
+    td, th {
+        border: 1px solid #ddd;
+        padding: 6px;
+    }
+}
+
 .link {
     width: 100px;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 510px) {
     .position{
         display: none;
     }
@@ -160,6 +167,17 @@ td, th {
 }
 
 @media screen and (max-width: 430px) {
+    .td-added {
+        display: none;
+    }
+}
+@media screen and (max-width: 1170px) {
+    .added {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1170px) {
     .td-added {
         display: none;
     }
