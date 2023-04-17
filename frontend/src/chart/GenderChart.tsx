@@ -71,7 +71,7 @@ const GenderChart = (props: Props) => {
             },
             title: {
                 display: true,
-                text: 'Percentage of Male and Female Employees',
+                text: 'Percentage of Male, Female, and Other Employees',
             },
             legend: {
                 display: true,
