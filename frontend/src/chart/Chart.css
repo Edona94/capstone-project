@@ -14,10 +14,10 @@
 }
 @media screen and (max-width: 430px) {
     .chart-container {
-        margin-left: 95px;
+        margin-left: 75px;
         margin-bottom: 8px;
-        width: 50%;
-        height: 150px;
+        width: 60%;
+        height: 200px;
         box-sizing: border-box;
         padding-left: 15px;
         padding-right: 10px;
