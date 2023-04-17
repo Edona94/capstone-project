@@ -18,7 +18,7 @@ export default function EmployeeGallery(props: Props) {
     const [sortedByFirstName, setSortedByFirstName] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [employeesPerPage] = useState(10);
+    const [employeesPerPage] = useState(12);
 
     const navigate = useNavigate();
     function handleClick() {
