@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import SignUpPage from "./component/SignUpPage";
 import SignInPage from "./component/SignInPage";
 import Chart from "./chart/Chart";
+import {Toaster} from "react-hot-toast";
 
 axios.interceptors.request.use(function (config) {
     return fetch("/api/csrf").then(() => {
@@ -36,6 +37,10 @@ function App() {
           <Route path={"/employee/edit/:id"} element={<EditEmployee employees={employees} onEdit={updateEmployee}/>}/>
           <Route path={"/chart"} element={<Chart employees={employees}/>}/>
          </Routes>
+        <Toaster
+            position={"top-right"}
+            toastOptions={{duration: 5000}}
+        />
         <Footer/>
     </div>
   );

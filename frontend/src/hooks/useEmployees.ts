@@ -24,7 +24,8 @@ export default function useEmployees() {
         })], {type: "application/json"}));
         return axios.post("/api/employees", payload)
             .then(response => response.data)
-            .then(data => setEmployees(prevState => [...prevState,data]))
+            .then(data => {setEmployees(prevState => [...prevState,data])
+            loadAllEmployees()})
             .catch(console.error)
     }
 

@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../styling/SignForm.css"
+import {toast} from "react-hot-toast";
 
 type Props = {
     action: "sign-up" | "sign-in"
@@ -11,8 +12,7 @@ export default function SignForm(props: Props) {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
-    const [formError, setFormError] = useState<string>("");
-    const successMessage = window.sessionStorage.getItem("successMessage");
+
 
     function handleUsernameChange(event: ChangeEvent<HTMLInputElement>) {
         setUsername(event.currentTarget.value)
@@ -31,22 +31,21 @@ export default function SignForm(props: Props) {
         event.preventDefault();
         axios.post(url, data, config)
             .then(() => {
-                if (props.action==="sign-up"){
-                    window.sessionStorage.setItem("successMessage", "Successfully registered")
-                } else{
-                    window.sessionStorage.removeItem("successMessage")
+                if (props.action === "sign-up") {
+                    toast.success('Successfully registered 🙂');
+                } else if (props.action === "sign-in") {
+                    toast.success('Successfully signed in 👍');
                 }
                 navigate(navigateTo);
-            }).catch(err => {
+            })
+            .catch(err => {
             console.error(err);
-            setFormError(err.response.data.error || err.response.data.message);
+            toast.error('Error:'+ (err.response.data.error || err.response.data.message));
         });
     }
 
     return (
         <form className={"signup-form"} onSubmit={formSubmitHandler}>
-            {formError && <div className={"form-error"}>Error: {formError}</div>}
-            {successMessage && <div className={"form-success"}>{successMessage}</div>}
             <div>
                 <label>
                     Username

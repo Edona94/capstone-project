@@ -88,7 +88,9 @@ export default function EmployeeForm(props: Props) {
     }
 
     function handlePhoneNumberChange(event: ChangeEvent<HTMLInputElement>) {
-        setPhoneNumber(event.target.value)
+        const inputPhoneNumber = event.target.value;
+        const numericPhoneNumber = inputPhoneNumber.replace(/\D/g, "");
+        setPhoneNumber(numericPhoneNumber);
     }
 
     function handleAddedChange(event: ChangeEvent<HTMLInputElement>) {
@@ -227,7 +229,6 @@ export default function EmployeeForm(props: Props) {
                         ))}
                     </div>
                 </div>
-                <span>Address:</span>
                 <div className={"user-details"}>
                     <div className={"input-box-address"}>
                         <span className={"details"}>Street:</span>
@@ -235,12 +236,12 @@ export default function EmployeeForm(props: Props) {
                                placeholder={"street"} required={true}/>
                     </div>
                     <div className={"input-box-address"}>
-                        <span className={"details"}>House nr:</span>
+                        <span className={"details"}>House number:</span>
                         <input type={"text"} onChange={handleAddress_HouseNumberChange} value={address.houseNumber}
                                placeholder={"house number"} required={true}/>
                     </div>
                     <div className={"input-box-address"}>
-                        <span className={"details"}>Plz:</span>
+                        <span className={"details"}>Postal code:</span>
                         <input type={"text"} onChange={handleAddress_PostalCodeChange} value={address.postalCode}
                                placeholder={"postal code"} required={true}/>
                     </div>
@@ -260,7 +261,7 @@ export default function EmployeeForm(props: Props) {
                     </div>
                     <div className={"input-box"}>
                         <span className={"details"}>Phone number: </span>
-                        <input type={"text"} onChange={handlePhoneNumberChange} value={phoneNumber}
+                        <input type={"tel"} onChange={handlePhoneNumberChange} value={phoneNumber}
                                placeholder={"phone number"} required={true}/>
                     </div>
                 </div>
