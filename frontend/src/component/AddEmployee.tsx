@@ -1,5 +1,5 @@
 import React from "react";
-import "../styling/AddEmployee.css"
+import "../styling/FormEmployee.css"
 import EmployeeForm from "./EmployeeForm";
 import {Employee} from "../model/Employee";
 import Layout from "./Layout";

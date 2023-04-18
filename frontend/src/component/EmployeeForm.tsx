@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {Employee, Address} from "../model/Employee";
 import {useNavigate} from "react-router-dom";
-import "../styling/AddEmployee.css"
+import "../styling/FormEmployee.css"
 import moment from "moment";
 import {Gender} from "../model/Gender";
 
