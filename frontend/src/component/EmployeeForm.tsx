@@ -285,7 +285,7 @@ export default function EmployeeForm(props: Props) {
                         </button>
                     </li>
                     <li>
-                        <button className={"cancel"} onClick={handleCancelButton}>Cancel</button>
+                        <button type={"button"} className={"cancel"} onClick={handleCancelButton}>Cancel</button>
                     </li>
                 </menu>
             </form>
