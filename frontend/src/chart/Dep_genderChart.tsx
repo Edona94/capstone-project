@@ -2,18 +2,8 @@ import React from "react";
 import {Employee} from "../model/Employee";
 import {Bar} from "react-chartjs-2";
 import './Chart.css';
-
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import {
-    Chart as ChartJS,
-    ChartOptions,
-    Title,
-    Tooltip,
-    Legend,
-    LinearScale,
-    CategoryScale,
-    BarElement
-} from "chart.js";
+import {Chart as ChartJS, ChartOptions, Title, Tooltip, Legend, LinearScale, CategoryScale, BarElement} from "chart.js";
 import {Gender} from "../model/Gender";
 
 ChartJS.register(
@@ -23,10 +13,9 @@ type Props = {
     employees: Employee[];
 };
 const countEmployeesByDepartmentAndGender = (employees: Employee[]) => {
-    // create an object to store the employee counts by department and gender
+
     const counts: { [key: string]: { [key: string]: number } } = {};
 
-    // loop over the employees and increment the count for each department and gender
     employees.forEach((employee) => {
         const {department, gender} = employee;
         if (!counts[department]) {
