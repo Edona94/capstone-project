@@ -13,6 +13,7 @@ import SignUpPage from "./component/SignUpPage";
 import SignInPage from "./component/SignInPage";
 import Chart from "./chart/Chart";
 import {Toaster} from "react-hot-toast";
+import './styling/Footer.css'
 
 axios.interceptors.request.use(function (config) {
     return fetch("/api/csrf").then(() => {
