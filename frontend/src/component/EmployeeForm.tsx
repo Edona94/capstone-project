@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {Employee, Address} from "../model/Employee";
 import {useNavigate} from "react-router-dom";
-import "../styling/AddEmployee.css"
+import "../styling/FormEmployee.css"
 import moment from "moment";
 import {Gender} from "../model/Gender";
 
@@ -285,7 +285,7 @@ export default function EmployeeForm(props: Props) {
                         </button>
                     </li>
                     <li>
-                        <button className={"cancel"} onClick={handleCancelButton}>Cancel</button>
+                        <button type={"button"} className={"cancel"} onClick={handleCancelButton}>Cancel</button>
                     </li>
                 </menu>
             </form>

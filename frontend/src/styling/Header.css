@@ -50,12 +50,3 @@
 .nav a.active:hover {
     color: chocolate;
 }
-
-.footer {
-    position: relative;
-    bottom: 0;
-    height: 4vh;
-    text-align: center;
-    background-color: rgba(198,198,198,0.2);
-    padding-top: 5px;
-}
