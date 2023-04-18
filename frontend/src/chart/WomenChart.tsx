@@ -3,16 +3,7 @@ import {Employee} from "../model/Employee";
 import {Bar} from "react-chartjs-2";
 import './Chart.css';
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import {
-    Chart as ChartJS,
-    ChartOptions,
-    Title,
-    Tooltip,
-    Legend,
-    LinearScale,
-    CategoryScale,
-    BarElement
-} from "chart.js";
+import {Chart as ChartJS, ChartOptions, Title, Tooltip, Legend, LinearScale, CategoryScale, BarElement} from "chart.js";
 import {Gender} from "../model/Gender";
 
 ChartJS.register(
@@ -22,7 +13,7 @@ type Props = {
     employees: Employee[];
 };
 
-const DepartmentChart = (props: Props) => {
+const WomenChart = (props: Props) => {
     const [chartData, setChartData] = useState<{
         labels: string[];
         datasets: {
@@ -163,4 +154,4 @@ femaleCounts.sort((a, b) =>
     );
 };
 
-export default DepartmentChart;
+export default WomenChart;
