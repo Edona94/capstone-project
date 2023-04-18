@@ -72,10 +72,10 @@ public class EmployeeService {
     public Employee updateEmployeeById(String id, EmployeeDTORequest employeeDTORequest, MultipartFile cv,Principal principal) {
         String adminId = mongoUserDetailsService.getMe(principal).id();
         Employee employee = getEmployeeById(id);
-        String cvUri = employee.cv(); // Set the cvUri to the existing CV URI by default
+        String cvUri = employee.cv();
 
-        if(cv != null && !cv.isEmpty()) { // Check if a new CV file has been provided
-            cvUri = uploadCv(cv); // If yes, upload the new CV and update the cvUri
+        if(cv != null && !cv.isEmpty()) {
+            cvUri = uploadCv(cv);
         }
         if (!employee.userId().equals(adminId)) {
             throw new UnauthorizedException("Only Admin can edit the employee data");
